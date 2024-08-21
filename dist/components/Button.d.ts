@@ -1,9 +1,17 @@
-import React from 'react';
-type ButtonProps = {
-    variant?: 'primary' | 'secondary';
-    size?: 'small' | 'medium' | 'large';
-    children: React.ReactNode;
-    onClick?: () => void;
-};
-declare const Button: ({ variant, size, children, onClick, }: ButtonProps) => import("@emotion/react/jsx-runtime").JSX.Element;
-export default Button;
+import React from "react";
+import { ButtonHTMLAttributes } from "react";
+type SizeType = "tiny" | "small" | "middle" | "large" | "xLarge";
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
+    className?: string;
+    variant?: "primary" | "secondary";
+    onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+    isLoading?: boolean;
+    startIcon?: React.ReactNode;
+    endIcon?: React.ReactNode;
+    fakeDisabled?: boolean;
+    size?: SizeType;
+}
+export default function Button({ className, variant, size, onClick, children, isLoading, startIcon, endIcon, fakeDisabled, ...rest }: ButtonProps): import("@emotion/react/jsx-runtime").JSX.Element;
+export {};

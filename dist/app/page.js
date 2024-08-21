@@ -1,99 +1,23 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = Home;
-var _image = _interopRequireDefault(require("next/image"));
-var _pageModule = _interopRequireDefault(require("./page.module.css"));
-var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var jsx_runtime_1 = require("@emotion/react/jsx-runtime");
+var image_1 = __importDefault(require("next/image"));
+var page_module_css_1 = __importDefault(require("./page.module.css"));
 function Home() {
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("main", {
-    className: _pageModule.default.main,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: _pageModule.default.description,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
-        children: ["Get started by editing\xA0", /*#__PURE__*/(0, _jsxRuntime.jsx)("code", {
-          className: _pageModule.default.code,
-          children: "src/app/page.tsx"
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-          href: "https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app",
-          target: "_blank",
-          rel: "noopener noreferrer",
-          children: ["By", " ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_image.default, {
-            src: "/vercel.svg",
-            alt: "Vercel Logo",
-            className: _pageModule.default.vercelLogo,
-            width: 100,
-            height: 24,
-            priority: true
-          })]
-        })
-      })]
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      className: _pageModule.default.center,
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_image.default, {
-        className: _pageModule.default.logo,
-        src: "/next.svg",
-        alt: "Next.js Logo",
-        width: 180,
-        height: 37,
-        priority: true
-      })
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: _pageModule.default.grid,
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-        href: "https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app",
-        className: _pageModule.default.card,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("h2", {
-          children: ["Docs ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: "->"
-          })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          children: "Find in-depth information about Next.js features and API."
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-        href: "https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app",
-        className: _pageModule.default.card,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("h2", {
-          children: ["Learn ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: "->"
-          })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          children: "Learn about Next.js in an interactive course with\xA0quizzes!"
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-        href: "https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app",
-        className: _pageModule.default.card,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("h2", {
-          children: ["Templates ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: "->"
-          })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          children: "Explore starter templates for Next.js."
-        })]
-      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
-        href: "https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app",
-        className: _pageModule.default.card,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("h2", {
-          children: ["Deploy ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: "->"
-          })]
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
-          children: "Instantly deploy your Next.js site to a shareable URL with Vercel."
-        })]
-      })]
-    })]
-  });
+    return ((0, jsx_runtime_1.jsxs)("main", __assign({ className: page_module_css_1.default.main }, { children: [(0, jsx_runtime_1.jsxs)("div", __assign({ className: page_module_css_1.default.description }, { children: [(0, jsx_runtime_1.jsxs)("p", { children: ["Get started by editing\u00A0", (0, jsx_runtime_1.jsx)("code", __assign({ className: page_module_css_1.default.code }, { children: "src/app/page.tsx" }))] }), (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("a", __assign({ href: "https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app", target: "_blank", rel: "noopener noreferrer" }, { children: ["By", " ", (0, jsx_runtime_1.jsx)(image_1.default, { src: "/vercel.svg", alt: "Vercel Logo", className: page_module_css_1.default.vercelLogo, width: 100, height: 24, priority: true })] })) })] })), (0, jsx_runtime_1.jsx)("div", __assign({ className: page_module_css_1.default.center }, { children: (0, jsx_runtime_1.jsx)(image_1.default, { className: page_module_css_1.default.logo, src: "/next.svg", alt: "Next.js Logo", width: 180, height: 37, priority: true }) })), (0, jsx_runtime_1.jsxs)("div", __assign({ className: page_module_css_1.default.grid }, { children: [(0, jsx_runtime_1.jsxs)("a", __assign({ href: "https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app", className: page_module_css_1.default.card, target: "_blank", rel: "noopener noreferrer" }, { children: [(0, jsx_runtime_1.jsxs)("h2", { children: ["Docs ", (0, jsx_runtime_1.jsx)("span", { children: "->" })] }), (0, jsx_runtime_1.jsx)("p", { children: "Find in-depth information about Next.js features and API." })] })), (0, jsx_runtime_1.jsxs)("a", __assign({ href: "https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app", className: page_module_css_1.default.card, target: "_blank", rel: "noopener noreferrer" }, { children: [(0, jsx_runtime_1.jsxs)("h2", { children: ["Learn ", (0, jsx_runtime_1.jsx)("span", { children: "->" })] }), (0, jsx_runtime_1.jsx)("p", { children: "Learn about Next.js in an interactive course with\u00A0quizzes!" })] })), (0, jsx_runtime_1.jsxs)("a", __assign({ href: "https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app", className: page_module_css_1.default.card, target: "_blank", rel: "noopener noreferrer" }, { children: [(0, jsx_runtime_1.jsxs)("h2", { children: ["Templates ", (0, jsx_runtime_1.jsx)("span", { children: "->" })] }), (0, jsx_runtime_1.jsx)("p", { children: "Explore starter templates for Next.js." })] })), (0, jsx_runtime_1.jsxs)("a", __assign({ href: "https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app", className: page_module_css_1.default.card, target: "_blank", rel: "noopener noreferrer" }, { children: [(0, jsx_runtime_1.jsxs)("h2", { children: ["Deploy ", (0, jsx_runtime_1.jsx)("span", { children: "->" })] }), (0, jsx_runtime_1.jsx)("p", { children: "Instantly deploy your Next.js site to a shareable URL with Vercel." })] }))] }))] })));
 }
+exports.default = Home;

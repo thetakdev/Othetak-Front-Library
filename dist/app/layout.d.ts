@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import type { Metadata } from "next";
 import "./globals.css";
 export declare const metadata: Metadata;

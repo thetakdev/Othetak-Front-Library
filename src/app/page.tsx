@@ -1,4 +1,5 @@
 "use client";
+import BankAccountIC from "@/components/images/BankAccountIC";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -54,7 +55,8 @@ export default function ImageGallery() {
           }}
           onClick={() => copyToClipboard(getFileName(image.name))}
         >
-          <Image src={image.path} alt={image.name} width={50} height={50} />
+          <BankAccountIC />
+          {/* <Image src={image.path} alt={image.name} width={50} height={50} />
           <div
             style={{
               whiteSpace: "nowrap",
@@ -68,7 +70,7 @@ export default function ImageGallery() {
             }}
           >
             {getFileName(image.name)}
-          </div>
+          </div> */}
         </div>
       ))}
     </div>

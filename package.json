@@ -1,6 +1,6 @@
 {
   "name": "thetak-library",
-  "version": "0.1.18",
+  "version": "0.1.20",
   "packageManager": "yarn@4.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate-images && tsc && babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\"",
+    "build": "npm run generate-images && tsc --emitDeclarationOnly && babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\"",
     "generate-images": "node generate-images.js",
     "watch": "babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\" --watch",
     "start": "next start",

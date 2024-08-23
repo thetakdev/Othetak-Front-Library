@@ -1,6 +1,6 @@
 {
   "name": "thetak-library",
-  "version": "0.1.5",
+  "version": "0.1.18",
   "packageManager": "yarn@4.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,12 +9,14 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\" && tsc",
+    "build": "npm run generate-images && tsc && babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\"",
+    "generate-images": "node generate-images.js",
     "watch": "babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\" --watch",
     "start": "next start",
     "lint": "next lint",
     "sb": "storybook dev -p 6008",
-    "build-sb": "storybook build"
+    "build-sb": "storybook build",
+    "image": "node generate-images.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -46,6 +48,7 @@
     "@types/node": "^20",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18",
+    "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-plugin-storybook": "^0.8.0",

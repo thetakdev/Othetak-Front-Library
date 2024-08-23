@@ -35,47 +35,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoggedIn = exports.LoggedOut = void 0;
-var test_1 = require("@storybook/test");
-var Page_1 = require("./Page");
-var meta = {
-    title: 'Example/Page',
-    component: Page_1.Page,
-    parameters: {
-        // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-        layout: 'fullscreen',
-    },
-};
-exports.default = meta;
-exports.LoggedOut = {};
-// More on interaction testing: https://storybook.js.org/docs/writing-tests/interaction-testing
-exports.LoggedIn = {
-    play: function (_a) {
-        var canvasElement = _a.canvasElement;
-        return __awaiter(void 0, void 0, void 0, function () {
-            var canvas, loginButton, logoutButton;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        canvas = (0, test_1.within)(canvasElement);
-                        loginButton = canvas.getByRole('button', { name: /Log in/i });
-                        return [4 /*yield*/, (0, test_1.expect)(loginButton).toBeInTheDocument()];
-                    case 1:
-                        _b.sent();
-                        return [4 /*yield*/, test_1.userEvent.click(loginButton)];
-                    case 2:
-                        _b.sent();
-                        return [4 /*yield*/, (0, test_1.expect)(loginButton).not.toBeInTheDocument()];
-                    case 3:
-                        _b.sent();
-                        logoutButton = canvas.getByRole('button', { name: /Log out/i });
-                        return [4 /*yield*/, (0, test_1.expect)(logoutButton).toBeInTheDocument()];
-                    case 4:
-                        _b.sent();
-                        return [2 /*return*/];
-                }
-            });
+exports.GET = GET;
+var server_1 = require("next/server");
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
+function GET() {
+    return __awaiter(this, void 0, void 0, function () {
+        var imagesDirectory, filenames, images;
+        return __generator(this, function (_a) {
+            console.log("패스!!!", path_1.default);
+            try {
+                imagesDirectory = path_1.default.join(process.cwd(), 'public/images');
+                console.log('이미지 디렉토리:', imagesDirectory); // 디버깅용
+                filenames = fs_1.default.readdirSync(imagesDirectory);
+                images = filenames.map(function (filename) { return ({
+                    name: filename,
+                    path: "/images/".concat(filename),
+                }); });
+                return [2 /*return*/, server_1.NextResponse.json(images)];
+            }
+            catch (error) {
+                console.error('Error reading images directory:', error);
+                return [2 /*return*/, server_1.NextResponse.json({ error: 'Failed to read images directory' }, { status: 500 })];
+            }
+            return [2 /*return*/];
         });
-    },
-};
+    });
+}

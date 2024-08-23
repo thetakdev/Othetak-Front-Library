@@ -1,95 +1,76 @@
+"use client";
 import Image from "next/image";
-import styles from "./page.module.css";
+import { useEffect, useState } from "react";
 
-export default function Home() {
+interface Image {
+  name: string;
+  path: string;
+}
+
+export default function ImageGallery() {
+  const [images, setImages] = useState<Image[]>([]);
+
+  useEffect(() => {
+    async function fetchImages() {
+      const response = await fetch("/api/images");
+      const data: Image[] = await response.json();
+      setImages(data);
+    }
+
+    fetchImages();
+  }, []);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
+  const getFileName = (fileName: string) => {
+    return `<${fileName
+      .replace(/[-_](.)/g, (match, group1) => group1.toUpperCase())
+      .replace(/\.[^/.]+$/, "")
+      .replace(/^(.)/, (match, group1) => group1.toUpperCase())}IC />`;
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "50px",
+        padding: "20px",
+      }}
+    >
+      {[...images].map((image, index) => (
+        <div
+          key={index}
+          style={{
+            cursor: "pointer",
+            textAlign: "left",
+            width: 50,
+            height: 50,
+            padding: "20px",
+            boxShadow:
+              "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.01)",
+          }}
+          onClick={() => copyToClipboard(getFileName(image.name))}
+        >
+          <Image src={image.path} alt={image.name} width={50} height={50} />
+          <div
+            style={{
+              whiteSpace: "nowrap",
+              fontSize: "1rem",
+              textAlign: "left",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 20,
+            }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            {getFileName(image.name)}
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      ))}
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 import { forwardRef } from "react";
-import { Common } from "@/styles/common";
 import styled from "@emotion/styled";
 
 interface Props {
@@ -44,6 +43,7 @@ export default forwardRef(function Checkbox(
         gap={gap}
         style={style}
         requiredPosition={requiredPosition}
+        checked={checked}
       >
         <input type="checkbox" checked={checked} onChange={onChange} />
         <span className="label">{label ? label : customLabel}</span>
@@ -58,11 +58,13 @@ const CustomLabel = styled.label<{
   requiredPosition?: "before" | "after";
   shape: "square" | "circle";
   disabled: boolean;
+  checked: boolean;
+  checkbox?: any;
 }>`
   display: inline-flex;
   align-items: center;
   gap: ${({ gap }) => (gap ? gap : "6px")};
-  color: ${Common.default.colors.grayScale.black};
+  color: ${({ theme }) => theme.colors.grayScale.black};
   line-height: normal;
   cursor: pointer;
 
@@ -73,16 +75,16 @@ const CustomLabel = styled.label<{
     background-image: ${({ shape, disabled }) => {
       if (shape === "square") {
         if (disabled) {
-          return "url(/images/checkbox/checkbox_disabled.svg)";
+          return "url(https://image.thetak.net/asset/product/images/checkbox_disabled.svg)";
         } else {
-          return "url(/images/checkbox/checkbox_admin_main.svg)";
+          return "url(https://image.thetak.net/asset/product/images/checkbox_default.svg)";
         }
       }
       if (shape === "circle") {
         if (disabled) {
-          return "url(/images/icon/radio/radio_unchecked_disabled.svg)";
+          return "url(https://image.thetak.net/asset/product/images/checkbox_radio_dsiabled_f.svg)";
         } else {
-          return "url(/images/icon/radio/radio_unchecked_gray_3.svg)";
+          return "url(https://image.thetak.net/asset/product/images/checkbox_radio_default.svg)";
         }
       }
     }};
@@ -93,19 +95,19 @@ const CustomLabel = styled.label<{
     cursor: pointer;
 
     &:checked {
-      background-image: ${({ shape, disabled }) => {
+      background-image: ${({ shape, disabled, theme }) => {
         if (shape === "square") {
           if (disabled) {
-            return "url(/images/checkbox/checkbox_checked_disabled.svg)";
+            return `url(https://image.thetak.net/asset/product/images/checkbox_disabled_t.svg)`;
           } else {
-            return "url(/images/checkbox/checkbox_checked_admin_main.svg)";
+            return `url(${theme.checkbox.square.checked})`;
           }
         }
         if (shape === "circle") {
           if (disabled) {
-            return "url(/images/icon/radio/radio_unchecked_disabled.svg)";
+            return "url(https://image.thetak.net/asset/product/images/checkbox_radio_disabled_t.svg)";
           } else {
-            return "url(/images/icon/radio/radio_checked_admin_main.svg)";
+            return `url(${theme.checkbox.radio.checked})`;
           }
         }
       }};
@@ -116,13 +118,13 @@ const CustomLabel = styled.label<{
     ::before {
       content: ${({ requiredPosition }) =>
         requiredPosition === "before" ? '"*"' : "none"};
-      color: ${Common.default.colors.errorColor.errorMain};
+      color: ${({ theme }) => theme.colors.errorColor.errorMain};
     }
 
     ::after {
       content: ${({ requiredPosition }) =>
         requiredPosition === "after" ? '"*"' : "none"};
-      color: ${Common.default.colors.errorColor.errorMain};
+      color: ${({ theme }) => theme.colors.errorColor.errorMain};
     }
   }
 `;

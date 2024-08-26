@@ -1,36 +1,35 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.SecondaryButton = exports.PrimaryButton = void 0;
-var _button = _interopRequireDefault(require("../../../../components/button"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const meta = {
-  title: "components/common/atoms/button/button",
-  component: _button.default,
-  tags: ['autodocs']
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _default = exports.default = meta;
-const PrimaryButton = exports.PrimaryButton = {
-  args: {
-    className: "",
-    variant: "primary",
-    isLoading: false,
-    disabled: false,
-    onClick: () => {},
-    style: {},
-    children: "primary"
-  }
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecondaryButton = exports.PrimaryButton = void 0;
+var button_1 = __importDefault(require("@/components/button"));
+var meta = {
+    title: "components/common/atoms/button/button",
+    component: button_1.default,
+    tags: ['autodocs'],
 };
-const SecondaryButton = exports.SecondaryButton = {
-  args: {
-    className: "",
-    variant: "secondary",
-    isLoading: false,
-    disabled: false,
-    onClick: () => {},
-    style: {},
-    children: "secondary"
-  }
+exports.default = meta;
+exports.PrimaryButton = {
+    args: {
+        className: "",
+        variant: "primary",
+        isLoading: false,
+        disabled: false,
+        onClick: function () { },
+        style: {},
+        children: "primary",
+    },
+};
+exports.SecondaryButton = {
+    args: {
+        className: "",
+        variant: "secondary",
+        isLoading: false,
+        disabled: false,
+        onClick: function () { },
+        style: {},
+        children: "secondary",
+    },
 };

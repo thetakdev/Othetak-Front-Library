@@ -1,1 +1,2 @@
-export default function ImageGallery(): import("@emotion/react/jsx-runtime").JSX.Element;
+declare const Page: () => string;
+export default Page;

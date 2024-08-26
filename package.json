@@ -1,6 +1,6 @@
 {
   "name": "thetak-library",
-  "version": "0.1.20",
+  "version": "0.1.33",
   "packageManager": "yarn@4.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,24 +9,33 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate-images && tsc --emitDeclarationOnly && babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\"",
+    "build": "tsc --emitDeclarationOnly && babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\"",
+    "copy-images": "cpx 'public/images/**/*' dist/images",
     "generate-images": "node generate-images.js",
     "watch": "babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\" --watch",
     "start": "next start",
     "lint": "next lint",
     "sb": "storybook dev -p 6008",
     "build-sb": "storybook build",
-    "image": "node generate-images.js"
+    "image": "node generate-images.js",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
+    "aws-sdk": "^2.1681.0",
+    "date-fns": "^3.6.0"
+  },
+  "peerDependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.7",
-    "date-fns": "^3.6.0",
+    "@types/node": "^20",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18",
     "lodash": "^4.17.21",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "typescript": "^5"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
@@ -44,15 +53,11 @@
     "@storybook/nextjs": "^8.2.9",
     "@storybook/react": "^8.2.9",
     "@storybook/test": "^8.2.9",
-    "@types/lodash": "^4",
-    "@types/node": "^20",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18",
     "babel-plugin-module-resolver": "^5.0.2",
+    "cpx": "^1.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-plugin-storybook": "^0.8.0",
-    "storybook": "^8.2.9",
-    "typescript": "^5"
+    "storybook": "^8.2.9"
   }
 }

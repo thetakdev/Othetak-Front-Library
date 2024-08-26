@@ -35,12 +35,10 @@ export default function Button({
   const theme = useTheme();
   const { disabled, style } = rest;
 
-  console.log("theme", theme)
-
   const loadingStyle = {
     width: parseInt((style?.height as string) || "37px") / 2,
     height: parseInt((style?.height as string) || "37px") / 2,
-    // color: theme.colors.mainColor.main,
+    color: theme.colors.mainColor.main,
   };
 
   return (
@@ -96,21 +94,21 @@ const buttonStyle = (theme: any): any => ({
   primary: {
     default: {
       color: theme.colors.grayScale.white,
-      // backgroundColor: theme.colors.mainColor.main,
+      backgroundColor: theme.colors.mainColor.main,
     },
     disabled: {
       color: theme.colors.grayScale.white,
       backgroundColor: theme.colors.grayScale.gray3,
     },
     hover: {
-      // // backgroundColor: theme.colors.mainColor.main7,
+      backgroundColor: theme.colors.mainColor.main7,
     },
   },
   secondary: {
     default: {
-      // // color: theme.colors.mainColor.main,
+      color: theme.colors.mainColor.main,
       backgroundColor: theme.colors.grayScale.white,
-      // // border: `1px solid ${theme.colors.mainColor.main}`,
+      border: `1px solid ${theme.colors.mainColor.main}`,
     },
     disabled: {
       color: theme.colors.grayScale.gray3,
@@ -118,8 +116,8 @@ const buttonStyle = (theme: any): any => ({
       border: `1px solid ${theme.colors.grayScale.gray3}`,
     },
     hover: {
-      // // color: theme.colors.mainColor.main7,
-      // border: `1px solid ${theme.colors.mainColor.main7}`,
+      color: theme.colors.mainColor.main7,
+      border: `1px solid ${theme.colors.mainColor.main7}`,
     },
   },
 });

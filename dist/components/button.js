@@ -34,7 +34,7 @@ function Button(_a) {
     var className = _a.className, _b = _a.variant, variant = _b === void 0 ? "primary" : _b, _c = _a.size, size = _c === void 0 ? "middle" : _c, onClick = _a.onClick, children = _a.children, isLoading = _a.isLoading, startIcon = _a.startIcon, endIcon = _a.endIcon, fakeDisabled = _a.fakeDisabled, rest = __rest(_a, ["className", "variant", "size", "onClick", "children", "isLoading", "startIcon", "endIcon", "fakeDisabled"]);
     var theme = (0, react_1.useTheme)();
     var disabled = rest.disabled, style = rest.style;
-    console.log("theme", theme);
+    
     var loadingStyle = {
         width: parseInt((style === null || style === void 0 ? void 0 : style.height) || "37px") / 2,
         height: parseInt((style === null || style === void 0 ? void 0 : style.height) || "37px") / 2,

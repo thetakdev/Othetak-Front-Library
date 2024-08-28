@@ -1,90 +1,165 @@
 "use strict";
 "use client";
-var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var jsx_runtime_1 = require("@emotion/react/jsx-runtime");
-var react_1 = require("react");
-var styled_1 = __importDefault(require("@emotion/styled"));
-exports.default = (0, react_1.forwardRef)(function Checkbox(_a, ref) {
-    var className = _a.className, _b = _a.shape, shape = _b === void 0 ? "square" : _b, _c = _a.size, size = _c === void 0 ? "20px" : _c, gap = _a.gap, style = _a.style, checked = _a.checked, onChange = _a.onChange, label = _a.label, customLabel = _a.customLabel, requiredPosition = _a.requiredPosition, disabled = _a.disabled;
-    return ((0, jsx_runtime_1.jsx)("div", __assign({ style: { height: size } }, { children: (0, jsx_runtime_1.jsxs)(CustomLabel, __assign({ shape: shape, disabled: disabled, className: className, ref: ref, size: size, gap: gap, style: style, requiredPosition: requiredPosition, checked: checked }, { children: [(0, jsx_runtime_1.jsx)("input", { type: "checkbox", checked: checked, onChange: onChange }), (0, jsx_runtime_1.jsx)("span", __assign({ className: "label" }, { children: label ? label : customLabel }))] })) })));
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-var CustomLabel = styled_1.default.label(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: inline-flex;\n  align-items: center;\n  gap: ", ";\n  color: ", ";\n  line-height: normal;\n  cursor: pointer;\n\n  input {\n    min-width: ", ";\n    height: ", ";\n    margin: 0px;\n    background-image: ", ";\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n    appearance: none;\n    cursor: pointer;\n\n    &:checked {\n      background-image: ", ";\n    }\n  }\n\n  .label {\n    ::before {\n      content: ", ";\n      color: ", ";\n    }\n\n    ::after {\n      content: ", ";\n      color: ", ";\n    }\n  }\n"], ["\n  display: inline-flex;\n  align-items: center;\n  gap: ", ";\n  color: ", ";\n  line-height: normal;\n  cursor: pointer;\n\n  input {\n    min-width: ", ";\n    height: ", ";\n    margin: 0px;\n    background-image: ", ";\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n    appearance: none;\n    cursor: pointer;\n\n    &:checked {\n      background-image: ", ";\n    }\n  }\n\n  .label {\n    ::before {\n      content: ", ";\n      color: ", ";\n    }\n\n    ::after {\n      content: ", ";\n      color: ", ";\n    }\n  }\n"])), function (_a) {
-    var gap = _a.gap;
-    return (gap ? gap : "6px");
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.colors.grayScale.black;
-}, function (_a) {
-    var size = _a.size;
-    return size;
-}, function (_a) {
-    var size = _a.size;
-    return size;
-}, function (_a) {
-    var shape = _a.shape, disabled = _a.disabled;
-    if (shape === "square") {
-        if (disabled) {
-            return "url(https://image.thetak.net/asset/product/images/checkbox_disabled.svg)";
-        }
-        else {
-            return "url(https://image.thetak.net/asset/product/images/checkbox_default.svg)";
-        }
-    }
-    if (shape === "circle") {
-        if (disabled) {
-            return "url(https://image.thetak.net/asset/product/images/checkbox_radio_dsiabled_f.svg)";
-        }
-        else {
-            return "url(https://image.thetak.net/asset/product/images/checkbox_radio_default.svg)";
-        }
-    }
-}, function (_a) {
-    var shape = _a.shape, disabled = _a.disabled, theme = _a.theme;
-    if (shape === "square") {
-        if (disabled) {
-            return "url(https://image.thetak.net/asset/product/images/checkbox_disabled_t.svg)";
-        }
-        else {
-            return "url(".concat(theme.checkbox.square.checked, ")");
-        }
-    }
-    if (shape === "circle") {
-        if (disabled) {
-            return "url(https://image.thetak.net/asset/product/images/checkbox_radio_disabled_t.svg)";
-        }
-        else {
-            return "url(".concat(theme.checkbox.radio.checked, ")");
-        }
-    }
-}, function (_a) {
-    var requiredPosition = _a.requiredPosition;
-    return requiredPosition === "before" ? '"*"' : "none";
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.colors.errorColor.errorMain;
-}, function (_a) {
-    var requiredPosition = _a.requiredPosition;
-    return requiredPosition === "after" ? '"*"' : "none";
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.colors.errorColor.errorMain;
+exports.default = void 0;
+var _react = require("react");
+var _styled = _interopRequireDefault(require("@emotion/styled"));
+var _jsxRuntime = require("react/jsx-runtime");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var _default = exports.default = /*#__PURE__*/(0, _react.forwardRef)(function Checkbox(_ref, ref) {
+  let {
+    className,
+    shape = "square",
+    size = "20px",
+    gap,
+    style,
+    checked = false,
+    onChange,
+    label,
+    customLabel,
+    requiredPosition,
+    disabled
+  } = _ref;
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    style: {
+      height: size
+    },
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(CustomLabel, {
+      shape: shape,
+      disabled: disabled,
+      className: className,
+      ref: ref,
+      size: size,
+      gap: gap,
+      style: style,
+      requiredPosition: requiredPosition,
+      checked: checked,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+        type: "checkbox",
+        checked: checked,
+        onChange: onChange
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "label",
+        children: label ? label : customLabel
+      })]
+    })
+  });
 });
-var templateObject_1;
+const CustomLabel = _styled.default.label`
+  display: inline-flex;
+  align-items: center;
+  gap: ${_ref2 => {
+  let {
+    gap
+  } = _ref2;
+  return gap ? gap : "6px";
+}};
+  color: ${_ref3 => {
+  let {
+    theme
+  } = _ref3;
+  return theme.colors.grayScale.black;
+}};
+  line-height: normal;
+  cursor: pointer;
+
+  input {
+    min-width: ${_ref4 => {
+  let {
+    size
+  } = _ref4;
+  return size;
+}};
+    height: ${_ref5 => {
+  let {
+    size
+  } = _ref5;
+  return size;
+}};
+    margin: 0px;
+    background-image: ${_ref6 => {
+  let {
+    shape,
+    disabled
+  } = _ref6;
+  if (shape === "square") {
+    if (disabled) {
+      return "url(https://image.thetak.net/asset/product/images/checkbox_disabled.svg)";
+    } else {
+      return "url(https://image.thetak.net/asset/product/images/checkbox_default.svg)";
+    }
+  }
+  if (shape === "circle") {
+    if (disabled) {
+      return "url(https://image.thetak.net/asset/product/images/checkbox_radio_dsiabled_f.svg)";
+    } else {
+      return "url(https://image.thetak.net/asset/product/images/checkbox_radio_default.svg)";
+    }
+  }
+}};
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    appearance: none;
+    cursor: pointer;
+
+    &:checked {
+      background-image: ${_ref7 => {
+  let {
+    shape,
+    disabled,
+    theme
+  } = _ref7;
+  if (shape === "square") {
+    if (disabled) {
+      return `url(https://image.thetak.net/asset/product/images/checkbox_disabled_t.svg)`;
+    } else {
+      return `url(${theme.checkbox.square.checked})`;
+    }
+  }
+  if (shape === "circle") {
+    if (disabled) {
+      return "url(https://image.thetak.net/asset/product/images/checkbox_radio_disabled_t.svg)";
+    } else {
+      return `url(${theme.checkbox.radio.checked})`;
+    }
+  }
+}};
+    }
+  }
+
+  .label {
+    ::before {
+      content: ${_ref8 => {
+  let {
+    requiredPosition
+  } = _ref8;
+  return requiredPosition === "before" ? '"*"' : "none";
+}};
+      color: ${_ref9 => {
+  let {
+    theme
+  } = _ref9;
+  return theme.colors.errorColor.errorMain;
+}};
+    }
+
+    ::after {
+      content: ${_ref10 => {
+  let {
+    requiredPosition
+  } = _ref10;
+  return requiredPosition === "after" ? '"*"' : "none";
+}};
+      color: ${_ref11 => {
+  let {
+    theme
+  } = _ref11;
+  return theme.colors.errorColor.errorMain;
+}};
+    }
+  }
+`;

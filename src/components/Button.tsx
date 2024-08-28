@@ -56,7 +56,7 @@ export default function Button({
       theme={theme} // 테마 전달
     >
       {!isLoading && startIcon}
-      {isLoading ? <CircularProgress style={loadingStyle} /> : children}asdasd
+      {isLoading ? <CircularProgress style={loadingStyle} /> : children}
       {!isLoading && endIcon}
     </CustomButton>
   );
@@ -153,6 +153,6 @@ const CustomButton = styled.button<{
       ? theme.colors.grayScale.white
       : fakeDisabled && variant === "secondary"
         ? theme.colors.grayScale.gray3
-        : "",
+        : "white",
   borderColor: fakeDisabled ? theme.colors.grayScale.gray3 : "",
 }));

@@ -1,3 +1,4 @@
+import EmotionProvider from "@/provider/emotion-provider";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <EmotionProvider>
+        <body>{children}</body>
+      </EmotionProvider>
     </html>
   );
 }

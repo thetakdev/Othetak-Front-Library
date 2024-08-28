@@ -1,6 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Page = function () {
-    return ('test');
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const Page = () => {
+  return 'test';
 };
-exports.default = Page;
+var _default = exports.default = Page;

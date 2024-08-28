@@ -23,7 +23,7 @@ export default forwardRef(function Checkbox(
     size = "20px",
     gap,
     style,
-    checked,
+    checked = false,
     onChange,
     label,
     customLabel,

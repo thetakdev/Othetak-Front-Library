@@ -43,8 +43,6 @@ export default forwardRef(function Input(
   }: Props,
   ref
 ) {
-  const theme = useTheme();
-
   return (
     <EContainer
       className={className}
@@ -78,55 +76,57 @@ const EContainer = styled.div<{
   inputStyle?: React.CSSProperties;
   position?: "start" | "end";
   gap?: number;
-}>(({ theme, size, status, inputStyle, position, gap }) => ({
-  position: "relative",
-  width: inputStyle?.width || SIZE_STYLE[size].width,
-  input: {
-    border: STATUS_STYLE(theme)[status].border,
-    backgroundColor: STATUS_STYLE(theme)[status].backgroundColor,
+}>(({ theme, size, status, inputStyle, position, gap }) => {
+  return {
+    position: "relative",
     width: inputStyle?.width || SIZE_STYLE[size].width,
-    height: inputStyle?.height || SIZE_STYLE[size].height,
-    fontSize: inputStyle?.fontSize || SIZE_STYLE[size].fontSize,
-    borderRadius: "8px",
-    padding: "10px 12px",
-    paddingRight: position === "end" ? `${20 + gap + gap}px` : "10px",
-    paddingLeft: position === "start" ? `${20 + gap + gap}px` : "10px",
-    fontWeight: 400,
-    "::placeholder": {
-      color: theme.colors.grayScale.gray3,
+    input: {
+      border: STATUS_STYLE(theme)[status].border,
+      backgroundColor: STATUS_STYLE(theme)[status].backgroundColor,
+      width: inputStyle?.width || SIZE_STYLE[size].width,
+      height: inputStyle?.height || SIZE_STYLE[size].height,
+      fontSize: inputStyle?.fontSize || SIZE_STYLE[size].fontSize,
+      borderRadius: "8px",
+      padding: "10px 12px",
+      paddingRight: position === "end" ? `${20 + gap + gap}px` : "10px",
+      paddingLeft: position === "start" ? `${20 + gap + gap}px` : "10px",
+      fontWeight: 400,
+      "::placeholder": {
+        color: theme.colors.grayScale?.gray3,
+      },
+      ":focus": {
+        borderColor: theme.colors.mainColor.main,
+      },
+      ":focus-visible": {
+        outline: "none",
+      },
+      ":disabled": {
+        color: theme.colors.grayScale?.gray25,
+        backgroundColor: theme.colors?.grayScale.gray4,
+      },
     },
-    ":focus": {
-      borderColor: theme.colors.mainColor.main,
+    ".adornment-wrapper": {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      right: position === "end" ? `${gap}px` : "",
+      left: position === "start" ? `${gap}px` : "",
     },
-    ":focus-visible": {
-      outline: "none",
-    },
-    ":disabled": {
-      color: theme.colors.grayScale.gray25,
-      backgroundColor: theme.colors.grayScale.gray4,
-    },
-  },
-  ".adornment-wrapper": {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    right: position === "end" ? `${gap}px` : "",
-    left: position === "start" ? `${gap}px` : "",
-  },
-}));
+  };
+});
 
 const STATUS_STYLE = (theme: any) => ({
   normal: {
-    border: `1px solid ${theme.colors.grayScale.gray3}`,
+    border: `1px solid ${theme.colors?.grayScale.gray3}`,
     backgroundColor: "#FFF",
   },
   error: {
-    border: `1px solid ${theme.colors.errorColor.errorMain}`,
-    backgroundColor: theme.colors.errorColor.error3,
+    border: `1px solid ${theme.colors?.errorColor.errorMain}`,
+    backgroundColor: theme.colors?.errorColor.error3,
   },
 });
 

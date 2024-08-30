@@ -17,7 +17,9 @@
     "lint": "next lint",
     "sb": "storybook dev -p 6008",
     "build-sb": "storybook build",
-    "image": "node generate-images.js"
+    "image": "node generate-images.js",
+    "build-storybook": "build-storybook -s public",
+    "serve-storybook": "serve storybook-static"
   },
   "peerDependencies": {
     "@emotion/react": "^11.11.3",

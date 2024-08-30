@@ -4,12 +4,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = exports.Checkbox = void 0;
 var _react = require("react");
 var _styled = _interopRequireDefault(require("@emotion/styled"));
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-var _default = exports.default = /*#__PURE__*/(0, _react.forwardRef)(function Checkbox(_ref, ref) {
+// eslint-disable-next-line react/display-name
+const Checkbox = exports.Checkbox = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
   let {
     className,
     shape = "square",
@@ -48,6 +49,7 @@ var _default = exports.default = /*#__PURE__*/(0, _react.forwardRef)(function Ch
     })
   });
 });
+var _default = exports.default = Checkbox;
 const CustomLabel = _styled.default.label`
   display: inline-flex;
   align-items: center;

@@ -3,8 +3,8 @@ type SizeType = "big" | "small" | "tiny" | "responsive";
 type StatusType = "normal" | "error";
 interface Props extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
     className?: string;
-    register: any;
-    name: string;
+    register?: any;
+    name?: string;
     style?: React.CSSProperties;
     inputStyle?: React.CSSProperties;
     adornment?: {

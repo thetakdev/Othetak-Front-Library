@@ -30,7 +30,7 @@ function Modal(_ref) {
       style: style,
       children: [isClose && /*#__PURE__*/(0, _jsxRuntime.jsx)(_image.default, {
         className: "close",
-        src: '/images/close_btn.svg',
+        src: 'https://image.thetak.net/asset/product/images/x_close_gray_2.svg',
         alt: "close",
         width: closeSize,
         height: closeSize,

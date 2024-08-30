@@ -22,7 +22,7 @@ export default function Modal({ open, onClose, style, hideBackdrop = false, isCl
         {isClose && (
           <Image
             className="close"
-            src={'/images/close_btn.svg'}
+            src={'https://image.thetak.net/asset/product/images/x_close_gray_2.svg'}
             alt="close"
             width={closeSize}
             height={closeSize}

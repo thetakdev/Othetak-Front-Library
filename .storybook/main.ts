@@ -14,5 +14,14 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../public"],
+  webpackFinal: async (config: any) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "date-fns/_lib/format/longFormatters": require.resolve(
+        "date-fns/_lib/format/longFormatters"
+      ),
+    };
+    return config;
+  },
 };
 export default config;

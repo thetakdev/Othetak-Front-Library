@@ -1,7 +1,6 @@
 "use client";
 import { InputHTMLAttributes, forwardRef } from "react";
 import styled from "@emotion/styled";
-import { useTheme } from "@emotion/react";
 
 // 타입 정의
 type SizeType = "big" | "small" | "tiny" | "responsive";
@@ -9,8 +8,8 @@ type StatusType = "normal" | "error";
 
 interface Props extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
   className?: string;
-  register: any;
-  name: string;
+  register?: any;
+  name?: string;
   style?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
   adornment?: {
@@ -19,8 +18,6 @@ interface Props extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
     gap?: number;
   };
   adornmentStyle?: React.CSSProperties;
-  successMessage?: string;
-  errorMessage?: string;
   size?: SizeType;
   status?: StatusType;
 }
@@ -35,8 +32,6 @@ export default forwardRef(function Input(
     inputStyle,
     adornment,
     adornmentStyle,
-    successMessage,
-    errorMessage,
     size = "big",
     status = "normal",
     ...rest
@@ -54,7 +49,7 @@ export default forwardRef(function Input(
       inputStyle={inputStyle}
     >
       <input
-        {...register(name)}
+        {...register ? {...register(name)} : undefined}
         autoComplete="off"
         style={inputStyle}
         {...rest}
@@ -69,8 +64,6 @@ export default forwardRef(function Input(
 
 // 스타일 정의
 const EContainer = styled.div<{
-  successMessage?: string;
-  errorMessage?: string;
   size: SizeType;
   status?: StatusType;
   inputStyle?: React.CSSProperties;
@@ -78,6 +71,7 @@ const EContainer = styled.div<{
   gap?: number;
 }>(({ theme, size, status, inputStyle, position, gap }) => {
   return {
+    display: 'flex',
     position: "relative",
     width: inputStyle?.width || SIZE_STYLE[size].width,
     input: {
@@ -88,8 +82,8 @@ const EContainer = styled.div<{
       fontSize: inputStyle?.fontSize || SIZE_STYLE[size].fontSize,
       borderRadius: "8px",
       padding: "10px 12px",
-      paddingRight: position === "end" ? `${20 + gap + gap}px` : "10px",
-      paddingLeft: position === "start" ? `${20 + gap + gap}px` : "10px",
+      paddingRight: position === "end" ? `20px` : "10px",
+      paddingLeft: position === "start" ? `20px` : "10px",
       fontWeight: 400,
       "::placeholder": {
         color: theme.colors.grayScale?.gray3,

@@ -4,14 +4,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Button;
+exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _material = require("@mui/material");
 var _styled = _interopRequireDefault(require("@emotion/styled"));
 var _react2 = require("@emotion/react");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function Button(_ref) {
+const Button = _ref => {
   let {
     className,
     variant = "primary",
@@ -51,7 +51,8 @@ function Button(_ref) {
       style: loadingStyle
     }) : children, !isLoading && endIcon]
   });
-}
+};
+var _default = exports.default = Button;
 const sizeStyle = {
   tiny: {
     height: "28px",
@@ -138,7 +139,6 @@ const CustomButton = _styled.default.button(_ref2 => {
     fontWeight: style?.fontWeight || sizeStyle[size]?.fontWeight,
     ":hover": fakeDisabled ? "" : buttonStyle(theme)[variant].hover,
     ":disabled": buttonStyle(theme)[variant].disabled,
-    color: fakeDisabled && variant === "primary" ? theme.colors.grayScale.white : fakeDisabled && variant === "secondary" ? theme.colors.grayScale.gray3 : "white",
     borderColor: fakeDisabled ? theme.colors.grayScale.gray3 : ""
   };
 });

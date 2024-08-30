@@ -20,7 +20,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   size?: SizeType;
 }
 
-export default function Button({
+const Button = ({
   className,
   variant = "primary",
   size = "middle",
@@ -31,7 +31,7 @@ export default function Button({
   endIcon,
   fakeDisabled,
   ...rest
-}: ButtonProps) {
+}: ButtonProps) => {
   const theme = useTheme();
   const { disabled, style } = rest;
 
@@ -60,7 +60,9 @@ export default function Button({
       {!isLoading && endIcon}
     </CustomButton>
   );
-}
+};
+
+export default Button;
 
 const sizeStyle: any = {
   tiny: {
@@ -148,11 +150,5 @@ const CustomButton = styled.button<{
   fontWeight: style?.fontWeight || sizeStyle[size]?.fontWeight,
   ":hover": fakeDisabled ? "" : buttonStyle(theme)[variant].hover,
   ":disabled": buttonStyle(theme)[variant].disabled,
-  color:
-    fakeDisabled && variant === "primary"
-      ? theme.colors.grayScale.white
-      : fakeDisabled && variant === "secondary"
-        ? theme.colors.grayScale.gray3
-        : "white",
   borderColor: fakeDisabled ? theme.colors.grayScale.gray3 : "",
 }));

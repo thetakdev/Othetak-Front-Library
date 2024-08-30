@@ -20,8 +20,6 @@ var _default = exports.default = /*#__PURE__*/(0, _react.forwardRef)(function In
     inputStyle,
     adornment,
     adornmentStyle,
-    successMessage,
-    errorMessage,
     size = "big",
     status = "normal",
     ...rest
@@ -35,7 +33,9 @@ var _default = exports.default = /*#__PURE__*/(0, _react.forwardRef)(function In
     gap: adornment?.gap,
     inputStyle: inputStyle,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-      ...register(name),
+      ...(register ? {
+        ...register(name)
+      } : undefined),
       autoComplete: "off",
       style: inputStyle,
       ...rest
@@ -56,6 +56,7 @@ const EContainer = _styled.default.div(_ref2 => {
     gap
   } = _ref2;
   return {
+    display: 'flex',
     position: "relative",
     width: inputStyle?.width || SIZE_STYLE[size].width,
     input: {
@@ -66,8 +67,8 @@ const EContainer = _styled.default.div(_ref2 => {
       fontSize: inputStyle?.fontSize || SIZE_STYLE[size].fontSize,
       borderRadius: "8px",
       padding: "10px 12px",
-      paddingRight: position === "end" ? `${20 + gap + gap}px` : "10px",
-      paddingLeft: position === "start" ? `${20 + gap + gap}px` : "10px",
+      paddingRight: position === "end" ? `20px` : "10px",
+      paddingLeft: position === "start" ? `20px` : "10px",
       fontWeight: 400,
       "::placeholder": {
         color: theme.colors.grayScale?.gray3

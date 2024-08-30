@@ -13,7 +13,7 @@ export interface SelectOptionType {
   value: string | number | boolean;
 }
 
-type Size = "small" | "normal" | "tiny" | "big" | "responsive";
+type Size = "tiny" | "small" | "normal" | "big" | "responsive";
 type Status = "normal" | "error";
 interface Props {
   className?: string;
@@ -47,7 +47,7 @@ function Select({
   status = "normal",
   multiSelect = false,
   allCheck = false,
-  placeholder,
+  placeholder = "선택",
 }: Props) {
   const theme = useTheme();
   const ref = useRef<any>(null);
@@ -84,6 +84,7 @@ function Select({
     setFocusedIndex(0);
   }, [searchTerm]);
 
+  // 옵션 선택
   const handleOptionClick = (el: SelectOptionType, onChange: any) => {
     if (multiSelect) {
       if (el.value === "all") {
@@ -111,6 +112,7 @@ function Select({
     }
   };
 
+  // 검색
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
@@ -119,7 +121,12 @@ function Select({
     );
   };
 
+  // 방향키로 아이템 선택
   const handleKeyDown = (e: React.KeyboardEvent, onChange: any) => {
+    if (visible === false) {
+      setVisible(true);
+      return;
+    }
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setFocusedIndex((prev) => (prev + 1) % filteredOptions.length);
@@ -138,6 +145,7 @@ function Select({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const idRef = useRef("simple-popper");
 
+  // 셀렉트박스 클릭
   const handleClick = React.useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       if (disabled) return;
@@ -148,6 +156,19 @@ function Select({
     },
     [visible, disabled]
   );
+
+  const scrollContainer = useRef(null);
+
+  // 방향키로 설정할 때 스크롤 위치 정하는 로직
+  useEffect(() => {
+    if (scrollContainer?.current) {
+      const value = selectType[size].height;
+      const numberOnly = parseInt(value, 10); // 결과: 44
+
+      scrollContainer.current.scrollTop = (focusedIndex - 4) * numberOnly;
+      return;
+    }
+  }, [focusedIndex, scrollContainer]);
 
   return (
     <Controller
@@ -173,6 +194,7 @@ function Select({
               <input
                 type="text"
                 value={searchTerm}
+                disabled={disabled}
                 onChange={handleSearch}
                 placeholder={
                   option.length === selectedOptions.length
@@ -182,7 +204,7 @@ function Select({
                 style={{ border: "none", outline: "none", width: "100%" }}
               />
               <Image
-                src={`/images/icon/arrow/${disabled ? "arrow_small_disabled" : "arrow_small_gray"}.svg`}
+                src={`https://image.thetak.net/asset/product/images/${disabled ? "arrow_down_gray_25" : "arrow_down_gray_2"}.svg`}
                 alt="arrow"
                 width={imgSize}
                 height={imgSize}
@@ -197,6 +219,7 @@ function Select({
               anchorEl={anchorEl}
               style={selectStyle}
               theme={theme}
+              ref={scrollContainer}
             >
               {filteredOptions.map((el, index) => {
                 const isSelected = selectedOptions.some(
@@ -248,7 +271,7 @@ const EContainer = styled.div<{
   theme: any;
 }>`
   display: inline-flex;
-  height: 44px;
+  box-sizing: border-box;
   position: relative;
   min-width: ${({ selectStyle, size }) =>
     selectStyle?.width || selectType[size].width};
@@ -277,6 +300,16 @@ const EContainer = styled.div<{
       transform: ${({ visible }) => `rotate(${visible ? 180 : 360}deg)`};
       transition: 0.125s;
     }
+
+    input {
+      &:disabled {
+        color: ${({ theme }) => theme.colors.grayScale.gray3};
+
+        &::placeholder {
+          color: ${({ theme }) => theme.colors.grayScale.gray25};
+        }
+      }
+    }
   }
 `;
 
@@ -292,6 +325,10 @@ const StyledPopper = styled(Popper)<{
       : selectType[size].height};
   width: ${({ selectStyle, size }) =>
     selectStyle?.width || selectType[size].width};
+  padding: ${({ selectStyle, size }) =>
+    selectStyle?.padding || selectType[size].padding};
+
+  padding-top: 0px;
   background-color: ${({ theme }) => theme.colors.grayScale.white};
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};
@@ -299,6 +336,7 @@ const StyledPopper = styled(Popper)<{
   overflow-x: hidden;
   z-index: 3;
   cursor: pointer;
+  max-height: 300px;
 
   .option {
     display: flex;
@@ -307,8 +345,11 @@ const StyledPopper = styled(Popper)<{
       selectStyle?.width || selectType[size].width};
     height: ${({ selectStyle, size }) =>
       selectStyle?.height || selectType[size].height};
-    padding: ${({ selectStyle, size }) =>
-      selectStyle?.padding || selectType[size].padding};
+    overflow: scroll;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin-left: -14px;
+
     color: ${({ theme }) => theme.colors.grayScale.black};
     border-top: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};
     font-size: ${({ selectStyle, size }) =>
@@ -331,6 +372,12 @@ const StyledPopper = styled(Popper)<{
 `;
 
 const selectType = {
+  tiny: {
+    width: "89px",
+    height: "28px",
+    padding: "0px 8px",
+    fontSize: "12px",
+  },
   small: {
     width: "89px",
     height: "32px",
@@ -342,12 +389,6 @@ const selectType = {
     height: "44px",
     padding: "10px 14px",
     fontSize: "16px",
-  },
-  tiny: {
-    width: "89px",
-    height: "28px",
-    padding: "0px 8px",
-    fontSize: "12px",
   },
   big: {
     width: "427px",

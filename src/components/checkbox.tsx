@@ -16,7 +16,8 @@ interface Props {
   disabled?: boolean;
 }
 
-export default forwardRef(function Checkbox(
+// eslint-disable-next-line react/display-name
+export const Checkbox = forwardRef((
   {
     className,
     shape = "square",
@@ -31,7 +32,7 @@ export default forwardRef(function Checkbox(
     disabled,
   }: Props,
   ref: any
-) {
+) => {
   return (
     <div style={{ height: size }}>
       <CustomLabel
@@ -51,6 +52,8 @@ export default forwardRef(function Checkbox(
     </div>
   );
 });
+
+export default Checkbox
 
 const CustomLabel = styled.label<{
   size: string;

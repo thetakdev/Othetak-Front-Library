@@ -26,6 +26,9 @@ const Accordion_1 = exports.Accordion_1 = {
         })]
       }),
       details: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: {
+          background: "#EEEEEE"
+        },
         children: "\uB0B4\uC6A9\uB0B4\uC6A9"
       })
     });

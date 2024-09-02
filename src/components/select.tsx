@@ -304,6 +304,7 @@ const EContainer = styled.div<{
     input {
       &:disabled {
         color: ${({ theme }) => theme.colors.grayScale.gray3};
+        background-color: ${({ theme }) => theme.colors.grayScale.gray4};
 
         &::placeholder {
           color: ${({ theme }) => theme.colors.grayScale.gray25};
@@ -346,6 +347,7 @@ const StyledPopper = styled(Popper)<{
     height: ${({ selectStyle, size }) =>
       selectStyle?.height || selectType[size].height};
     overflow: scroll;
+    overflow-x: hidden;
     padding-left: 14px;
     padding-right: 14px;
     margin-left: -14px;

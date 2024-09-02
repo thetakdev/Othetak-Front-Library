@@ -27,23 +27,24 @@
     input {
       &:disabled {
         color: ${_ref14=>{let{theme}=_ref14;return theme.colors.grayScale.gray3}};
+        background-color: ${_ref15=>{let{theme}=_ref15;return theme.colors.grayScale.gray4}};
 
         &::placeholder {
-          color: ${_ref15=>{let{theme}=_ref15;return theme.colors.grayScale.gray25}};
+          color: ${_ref16=>{let{theme}=_ref16;return theme.colors.grayScale.gray25}};
         }
       }
     }
   }
 `,StyledPopper=(0,emotion_styled_browser_esm.A)(Popper.A)`
   position: absolute;
-  top: ${_ref16=>{let{selectStyle,size}=_ref16;return selectStyle?.height?`calc(${selectStyle.height} + 2px)`:selectType[size].height}};
-  width: ${_ref17=>{let{selectStyle,size}=_ref17;return selectStyle?.width||selectType[size].width}};
-  padding: ${_ref18=>{let{selectStyle,size}=_ref18;return selectStyle?.padding||selectType[size].padding}};
+  top: ${_ref17=>{let{selectStyle,size}=_ref17;return selectStyle?.height?`calc(${selectStyle.height} + 2px)`:selectType[size].height}};
+  width: ${_ref18=>{let{selectStyle,size}=_ref18;return selectStyle?.width||selectType[size].width}};
+  padding: ${_ref19=>{let{selectStyle,size}=_ref19;return selectStyle?.padding||selectType[size].padding}};
 
   padding-top: 0px;
-  background-color: ${_ref19=>{let{theme}=_ref19;return theme.colors.grayScale.white}};
+  background-color: ${_ref20=>{let{theme}=_ref20;return theme.colors.grayScale.white}};
   border-radius: 6px;
-  border: 1px solid ${_ref20=>{let{theme}=_ref20;return theme.colors.grayScale.gray4}};
+  border: 1px solid ${_ref21=>{let{theme}=_ref21;return theme.colors.grayScale.gray4}};
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 3;
@@ -53,29 +54,30 @@
   .option {
     display: flex;
     align-items: center;
-    width: ${_ref21=>{let{selectStyle,size}=_ref21;return selectStyle?.width||selectType[size].width}};
-    height: ${_ref22=>{let{selectStyle,size}=_ref22;return selectStyle?.height||selectType[size].height}};
+    width: ${_ref22=>{let{selectStyle,size}=_ref22;return selectStyle?.width||selectType[size].width}};
+    height: ${_ref23=>{let{selectStyle,size}=_ref23;return selectStyle?.height||selectType[size].height}};
     overflow: scroll;
+    overflow-x: hidden;
     padding-left: 14px;
     padding-right: 14px;
     margin-left: -14px;
 
-    color: ${_ref23=>{let{theme}=_ref23;return theme.colors.grayScale.black}};
-    border-top: 1px solid ${_ref24=>{let{theme}=_ref24;return theme.colors.grayScale.gray4}};
-    font-size: ${_ref25=>{let{selectStyle,size}=_ref25;return selectStyle?.fontSize||selectType[size].fontSize}};
-    font-weight: ${_ref26=>{let{selectStyle}=_ref26;return selectStyle?.fontWeight||"400"}};
+    color: ${_ref24=>{let{theme}=_ref24;return theme.colors.grayScale.black}};
+    border-top: 1px solid ${_ref25=>{let{theme}=_ref25;return theme.colors.grayScale.gray4}};
+    font-size: ${_ref26=>{let{selectStyle,size}=_ref26;return selectStyle?.fontSize||selectType[size].fontSize}};
+    font-weight: ${_ref27=>{let{selectStyle}=_ref27;return selectStyle?.fontWeight||"400"}};
     line-height: normal;
 
     &.selected {
-      background-color: ${_ref27=>{let{theme}=_ref27;return theme.colors.mainColor.main1}};
+      background-color: ${_ref28=>{let{theme}=_ref28;return theme.colors.mainColor.main1}};
     }
 
     &.focused {
-      background-color: ${_ref28=>{let{theme}=_ref28;return theme.colors.grayScale.gray3}};
+      background-color: ${_ref29=>{let{theme}=_ref29;return theme.colors.grayScale.gray3}};
     }
 
     :hover {
-      background-color: ${_ref29=>{let{theme}=_ref29;return theme.colors.mainColor.main2}};
+      background-color: ${_ref30=>{let{theme}=_ref30;return theme.colors.mainColor.main2}};
     }
   }
 `,selectType={tiny:{width:"89px",height:"28px",padding:"0px 8px",fontSize:"12px"},small:{width:"89px",height:"32px",padding:"4px 8px",fontSize:"12px"},normal:{width:"290px",height:"44px",padding:"10px 14px",fontSize:"16px"},big:{width:"427px",height:"44px",padding:"10px 14px",fontSize:"16px"},responsive:{width:"100%",height:"32px",padding:"4px 8px",fontSize:"12px"}},STATUS_STYLE=theme=>({normal:{backgroundColor:theme.colors.grayScale.white,border:`1px solid ${theme.colors.grayScale.gray3}`,color:theme.colors.grayScale.black},error:{backgroundColor:theme.colors.errorColor.error3,border:`1px solid ${theme.colors.errorColor.errorMain}`,color:theme.colors.grayScale.black},disabled:{backgroundColor:theme.colors.grayScale.gray4,border:`1px solid ${theme.colors.grayScale.gray3}`,color:theme.colors.grayScale.gray3}});Select.__docgenInfo={description:"",methods:[],displayName:"Select",props:{className:{required:!1,tsType:{name:"string"},description:""},control:{required:!0,tsType:{name:"any"},description:""},name:{required:!0,tsType:{name:"string"},description:""},option:{required:!0,tsType:{name:"Array",elements:[{name:"SelectOptionType"}],raw:"SelectOptionType[]"},description:""},imgSize:{required:!1,tsType:{name:"number"},description:"",defaultValue:{value:"14",computed:!1}},selectStyle:{required:!1,tsType:{name:"ReactCSSProperties",raw:"React.CSSProperties"},description:""},labelStyle:{required:!1,tsType:{name:"ReactCSSProperties",raw:"React.CSSProperties"},description:""},popperStyle:{required:!1,tsType:{name:"ReactCSSProperties",raw:"React.CSSProperties"},description:""},optionStyle:{required:!1,tsType:{name:"ReactCSSProperties",raw:"React.CSSProperties"},description:""},disabled:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},size:{required:!1,tsType:{name:"union",raw:'"tiny" | "small" | "normal" | "big" | "responsive"',elements:[{name:"literal",value:'"tiny"'},{name:"literal",value:'"small"'},{name:"literal",value:'"normal"'},{name:"literal",value:'"big"'},{name:"literal",value:'"responsive"'}]},description:"",defaultValue:{value:'"normal"',computed:!1}},status:{required:!1,tsType:{name:"union",raw:'"normal" | "error"',elements:[{name:"literal",value:'"normal"'},{name:"literal",value:'"error"'}]},description:"",defaultValue:{value:'"normal"',computed:!1}},multiSelect:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},allCheck:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},placeholder:{required:!1,tsType:{name:"string"},description:"",defaultValue:{value:'"선택"',computed:!1}}}};var console=__webpack_require__("./node_modules/console-browserify/index.js"),select_stories_jsx=react.createElement;const select_stories={title:"components/Select/Select",component:components_select,tags:["autodocs"]},PrimarySelect={render:()=>{const{control,getValues}=(0,index_esm.mN)({defaultValues:{userTypeCode:2}}),OPTIONS=[{label:"선택1",value:1},{label:"선택2",value:2},{label:"선택3",value:3},{label:"선택4",value:4},{label:"선택1",value:5},{label:"선택2",value:6},{label:"선택3",value:7},{label:"선택4",value:8},{label:"선택1",value:1},{label:"선택2",value:2},{label:"선택3",value:3},{label:"선택4",value:4},{label:"선택1",value:5},{label:"선택2",value:6},{label:"선택3",value:7},{label:"선택4",value:8},{label:"선택1",value:1},{label:"선택2",value:2},{label:"선택3",value:3},{label:"선택4",value:4},{label:"선택1",value:5},{label:"선택2",value:6},{label:"선택3",value:7},{label:"선택4",value:8}];return(0,react.useEffect)((()=>{console.log("getValues",getValues())}),[getValues()]),select_stories_jsx(react.Fragment,null,select_stories_jsx("div",null,select_stories_jsx("h1",null,"Select"),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"tiny",placeholder:"선택"}),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"tiny",placeholder:"선택",disabled:!0})),select_stories_jsx("div",null,select_stories_jsx("h1",null,"MultiSelect"),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"tiny",placeholder:"선택",multiSelect:!0})),select_stories_jsx("div",null,select_stories_jsx("h1",null,"전체 선택"),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"tiny",placeholder:"선택",multiSelect:!0,allCheck:!0})),select_stories_jsx("div",null,select_stories_jsx("h1",null,"SIZE"),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"small",multiSelect:!0}),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"normal"}),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"big"}),select_stories_jsx(components_select,{control,name:"userTypeCode",option:OPTIONS,size:"responsive"})))}},__namedExportsOrder=["PrimarySelect"];PrimarySelect.parameters={...PrimarySelect.parameters,docs:{...PrimarySelect.parameters?.docs,source:{originalSource:'{\n  render: () => {\n    const initialParams = {\n      userTypeCode: 2\n    };\n    const {\n      control,\n      getValues\n    } = useForm({\n      defaultValues: initialParams\n    });\n    const OPTIONS = [{\n      label: "선택1",\n      value: 1\n    }, {\n      label: "선택2",\n      value: 2\n    }, {\n      label: "선택3",\n      value: 3\n    }, {\n      label: "선택4",\n      value: 4\n    }, {\n      label: "선택1",\n      value: 5\n    }, {\n      label: "선택2",\n      value: 6\n    }, {\n      label: "선택3",\n      value: 7\n    }, {\n      label: "선택4",\n      value: 8\n    }, {\n      label: "선택1",\n      value: 1\n    }, {\n      label: "선택2",\n      value: 2\n    }, {\n      label: "선택3",\n      value: 3\n    }, {\n      label: "선택4",\n      value: 4\n    }, {\n      label: "선택1",\n      value: 5\n    }, {\n      label: "선택2",\n      value: 6\n    }, {\n      label: "선택3",\n      value: 7\n    }, {\n      label: "선택4",\n      value: 8\n    }, {\n      label: "선택1",\n      value: 1\n    }, {\n      label: "선택2",\n      value: 2\n    }, {\n      label: "선택3",\n      value: 3\n    }, {\n      label: "선택4",\n      value: 4\n    }, {\n      label: "선택1",\n      value: 5\n    }, {\n      label: "선택2",\n      value: 6\n    }, {\n      label: "선택3",\n      value: 7\n    }, {\n      label: "선택4",\n      value: 8\n    }];\n    useEffect(() => {\n      console.log("getValues", getValues());\n    }, [getValues()]);\n    return <>\n        <div>\n          <h1>Select</h1>\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="tiny" placeholder="선택" />\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="tiny" placeholder="선택" disabled />\n        </div>\n        <div>\n          <h1>MultiSelect</h1>\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="tiny" placeholder="선택" multiSelect />\n        </div>\n        <div>\n          <h1>전체 선택</h1>\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="tiny" placeholder="선택" multiSelect allCheck />\n        </div>\n\n        <div>\n          <h1>SIZE</h1>\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="small" multiSelect />\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="normal" />\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="big" />\n          <Select control={control} name="userTypeCode" option={OPTIONS} size="responsive" />\n        </div>\n      </>;\n  }\n}',...PrimarySelect.parameters?.docs?.source}}}},"./src/components/checkbox.tsx":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{A:()=>__WEBPACK_DEFAULT_EXPORT__});var react__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/next/dist/compiled/react/index.js"),_emotion_styled__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./node_modules/@emotion/styled/dist/emotion-styled.browser.esm.js"),__jsx=react__WEBPACK_IMPORTED_MODULE_0__.createElement;const Checkbox=(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(((_ref,ref)=>{let{className,shape="square",size="20px",gap,style,checked=!1,onChange,label,customLabel,requiredPosition,disabled}=_ref;return __jsx("div",{style:{height:size}},__jsx(CustomLabel,{shape,disabled,className,ref,size,gap,style,requiredPosition,checked},__jsx("input",{type:"checkbox",checked,onChange}),__jsx("span",{className:"label"},label||customLabel)))})),__WEBPACK_DEFAULT_EXPORT__=Checkbox,CustomLabel=_emotion_styled__WEBPACK_IMPORTED_MODULE_1__.A.label`
@@ -114,4 +116,4 @@
     }
   }
 `;Checkbox.__docgenInfo={description:"",methods:[],displayName:"Checkbox",props:{className:{required:!1,tsType:{name:"string"},description:""},size:{required:!1,tsType:{name:"string"},description:"",defaultValue:{value:'"20px"',computed:!1}},gap:{required:!1,tsType:{name:"string"},description:""},style:{required:!1,tsType:{name:"ReactCSSProperties",raw:"React.CSSProperties"},description:""},checked:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},onChange:{required:!1,tsType:{name:"signature",type:"function",raw:"(e: React.ChangeEvent<HTMLInputElement>) => void",signature:{arguments:[{type:{name:"ReactChangeEvent",raw:"React.ChangeEvent<HTMLInputElement>",elements:[{name:"HTMLInputElement"}]},name:"e"}],return:{name:"void"}}},description:""},label:{required:!1,tsType:{name:"string"},description:""},customLabel:{required:!1,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:""},requiredPosition:{required:!1,tsType:{name:"union",raw:'"before" | "after"',elements:[{name:"literal",value:'"before"'},{name:"literal",value:'"after"'}]},description:""},shape:{required:!1,tsType:{name:"union",raw:'"square" | "circle"',elements:[{name:"literal",value:'"square"'},{name:"literal",value:'"circle"'}]},description:"",defaultValue:{value:'"square"',computed:!1}},disabled:{required:!1,tsType:{name:"boolean"},description:""}}}}}]);
-//# sourceMappingURL=stories-select-select-stories.fa4b839f.iframe.bundle.js.map
+//# sourceMappingURL=stories-select-select-stories.82bb4f4d.iframe.bundle.js.map

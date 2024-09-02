@@ -317,12 +317,18 @@ const EContainer = _styled.default.div`
   } = _ref14;
   return theme.colors.grayScale.gray3;
 }};
-
-        &::placeholder {
-          color: ${_ref15 => {
+        background-color: ${_ref15 => {
   let {
     theme
   } = _ref15;
+  return theme.colors.grayScale.gray4;
+}};
+
+        &::placeholder {
+          color: ${_ref16 => {
+  let {
+    theme
+  } = _ref16;
   return theme.colors.grayScale.gray25;
 }};
         }
@@ -332,40 +338,40 @@ const EContainer = _styled.default.div`
 `;
 const StyledPopper = (0, _styled.default)(_material.Popper)`
   position: absolute;
-  top: ${_ref16 => {
-  let {
-    selectStyle,
-    size
-  } = _ref16;
-  return selectStyle?.height ? `calc(${selectStyle.height} + 2px)` : selectType[size].height;
-}};
-  width: ${_ref17 => {
+  top: ${_ref17 => {
   let {
     selectStyle,
     size
   } = _ref17;
-  return selectStyle?.width || selectType[size].width;
+  return selectStyle?.height ? `calc(${selectStyle.height} + 2px)` : selectType[size].height;
 }};
-  padding: ${_ref18 => {
+  width: ${_ref18 => {
   let {
     selectStyle,
     size
   } = _ref18;
+  return selectStyle?.width || selectType[size].width;
+}};
+  padding: ${_ref19 => {
+  let {
+    selectStyle,
+    size
+  } = _ref19;
   return selectStyle?.padding || selectType[size].padding;
 }};
 
   padding-top: 0px;
-  background-color: ${_ref19 => {
-  let {
-    theme
-  } = _ref19;
-  return theme.colors.grayScale.white;
-}};
-  border-radius: 6px;
-  border: 1px solid ${_ref20 => {
+  background-color: ${_ref20 => {
   let {
     theme
   } = _ref20;
+  return theme.colors.grayScale.white;
+}};
+  border-radius: 6px;
+  border: 1px solid ${_ref21 => {
+  let {
+    theme
+  } = _ref21;
   return theme.colors.grayScale.gray4;
 }};
   overflow-y: auto;
@@ -377,75 +383,76 @@ const StyledPopper = (0, _styled.default)(_material.Popper)`
   .option {
     display: flex;
     align-items: center;
-    width: ${_ref21 => {
-  let {
-    selectStyle,
-    size
-  } = _ref21;
-  return selectStyle?.width || selectType[size].width;
-}};
-    height: ${_ref22 => {
+    width: ${_ref22 => {
   let {
     selectStyle,
     size
   } = _ref22;
+  return selectStyle?.width || selectType[size].width;
+}};
+    height: ${_ref23 => {
+  let {
+    selectStyle,
+    size
+  } = _ref23;
   return selectStyle?.height || selectType[size].height;
 }};
     overflow: scroll;
+    overflow-x: hidden;
     padding-left: 14px;
     padding-right: 14px;
     margin-left: -14px;
 
-    color: ${_ref23 => {
-  let {
-    theme
-  } = _ref23;
-  return theme.colors.grayScale.black;
-}};
-    border-top: 1px solid ${_ref24 => {
+    color: ${_ref24 => {
   let {
     theme
   } = _ref24;
+  return theme.colors.grayScale.black;
+}};
+    border-top: 1px solid ${_ref25 => {
+  let {
+    theme
+  } = _ref25;
   return theme.colors.grayScale.gray4;
 }};
-    font-size: ${_ref25 => {
+    font-size: ${_ref26 => {
   let {
     selectStyle,
     size
-  } = _ref25;
+  } = _ref26;
   return selectStyle?.fontSize || selectType[size].fontSize;
 }};
-    font-weight: ${_ref26 => {
+    font-weight: ${_ref27 => {
   let {
     selectStyle
-  } = _ref26;
+  } = _ref27;
   return selectStyle?.fontWeight || "400";
 }};
     line-height: normal;
 
     &.selected {
-      background-color: ${_ref27 => {
+      background-color: ${_ref28 => {
   let {
     theme
-  } = _ref27;
+  } = _ref28;
   return theme.colors.mainColor.main1;
 }};
     }
 
     &.focused {
-      background-color: ${_ref28 => {
+      background-color: ${_ref29 => {
   let {
     theme
-  } = _ref28;
+  } = _ref29;
   return theme.colors.grayScale.gray3;
 }};
     }
 
     :hover {
-      background-color: ${_ref29 => {
+      background-color: ${_ref30 => {
   let {
     theme
-  } = _ref29;
+  } = _ref30;
   return theme.colors.mainColor.main2;
 }};
     }

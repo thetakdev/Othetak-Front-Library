@@ -1,7 +1,6 @@
 {
   "name": "thetak-library",
   "version": "0.1.34",
-  "packageManager": "yarn@4.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,16 +9,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "tsc --emitDeclarationOnly && babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\"",
-    "copy-images": "cpx 'public/images/**/*' dist/images",
-    "generate-images": "node generate-images.js",
     "watch": "babel src --out-dir dist --extensions \".js,.jsx,.ts,.tsx\" --watch",
     "start": "next start",
     "lint": "next lint",
     "sb": "storybook dev -p 6008",
-    "build-sb": "storybook build",
-    "image": "node generate-images.js",
-    "build-storybook": "build-storybook -s public",
-    "serve-storybook": "serve storybook-static"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_804ae592163fdac"
   },
   "peerDependencies": {
     "@emotion/react": "^11.11.3",

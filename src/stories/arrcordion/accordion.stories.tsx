@@ -20,7 +20,7 @@ export const Accordion_1: Story = {
             <b className="dot">기본 관리</b>
           </div>
         }
-        details={<div>내용내용</div>}
+        details={<div style={{ background: "#EEEEEE" }}>내용내용</div>}
       />
     );
   },

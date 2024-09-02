@@ -1,3 +1,4 @@
+/// <reference types="react" />
 interface Props {
     open: boolean;
     onClose: () => void;

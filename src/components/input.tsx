@@ -81,9 +81,11 @@ const EContainer = styled.div<{
       height: inputStyle?.height || SIZE_STYLE[size].height,
       fontSize: inputStyle?.fontSize || SIZE_STYLE[size].fontSize,
       borderRadius: "8px",
-      padding: "10px 12px",
       paddingRight: position === "end" ? `20px` : "10px",
       paddingLeft: position === "start" ? `20px` : "10px",
+      paddingTop: '0px',
+      paddingBottom: '0px',
+      boxSizing: 'border-box',
       fontWeight: 400,
       "::placeholder": {
         color: theme.colors.grayScale?.gray3,

@@ -15,7 +15,7 @@ export interface SelectOptionType {
 
 type Size = "tiny" | "small" | "normal" | "big" | "responsive";
 type Status = "normal" | "error";
-interface Props {
+export interface SELECT_PROPS {
   className?: string;
   control: any;
   name: string;
@@ -48,7 +48,7 @@ function Select({
   multiSelect = false,
   allCheck = false,
   placeholder = "선택",
-}: Props) {
+}: SELECT_PROPS) {
   const theme = useTheme();
   const ref = useRef<any>(null);
   const [visible, setVisible] = useState(false);
@@ -170,6 +170,15 @@ function Select({
     }
   }, [focusedIndex, scrollContainer]);
 
+  const [popperWidth, setPopperWidth] = useState<string | number>("auto"); // Popper 너비 상태 추가
+
+  useEffect(() => {
+    // EContainer의 너비를 가져와 Popper의 너비로 설정
+    if (ref.current) {
+      setPopperWidth(ref.current.offsetWidth);
+    }
+  }, [visible, ref.current]); // visible 또는 ref가 변경될 때마다 재계산
+
   return (
     <Controller
       name={name}
@@ -217,7 +226,8 @@ function Select({
               id={idRef.current}
               open={visible}
               anchorEl={anchorEl}
-              style={selectStyle}
+              style={{ ...selectStyle, width: popperWidth }} // 여기서 popperWidth 사용
+              // style={selectStyle}
               theme={theme}
               ref={scrollContainer}
             >
@@ -328,7 +338,7 @@ const StyledPopper = styled(Popper)<{
     selectStyle?.width || selectType[size].width};
   padding: ${({ selectStyle, size }) =>
     selectStyle?.padding || selectType[size].padding};
-
+  box-sizing: border-box;
   padding-top: 0px;
   background-color: ${({ theme }) => theme.colors.grayScale.white};
   border-radius: 6px;
@@ -351,6 +361,7 @@ const StyledPopper = styled(Popper)<{
     padding-left: 14px;
     padding-right: 14px;
     margin-left: -14px;
+    width: 100%;
 
     color: ${({ theme }) => theme.colors.grayScale.black};
     border-top: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};

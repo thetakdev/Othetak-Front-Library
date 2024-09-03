@@ -3,7 +3,7 @@ import Switch, { SwitchProps } from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useTheme } from "@emotion/react";
 
-export const ToggleSwitch = styled((props: SwitchProps) => (
+export const ToggleSwitch: any = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 36,

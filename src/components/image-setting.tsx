@@ -3,9 +3,8 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import Button from "@/components/button";
 import { useRef } from "react";
-import { COLORS } from "@/styles/common";
 import Input from "@/components/input";
-import { ASSET_IMAGE_URL } from "@/static/common";
+import { useTheme } from "@emotion/react";
 
 interface ImageSettingProps {
   onChange: (e: any, type: IMAGE_TYPE) => void;
@@ -26,13 +25,14 @@ const ImageSetting = ({
   isEdit = true,
 }: ImageSettingProps) => {
   const fileRef = useRef(null);
+  const theme = useTheme();
 
   return (
     <Container>
       {path ? (
         <div className="wrapper">
           <Image
-            src={`${ASSET_IMAGE_URL}${path}`}
+            src={`https://image.thetak.net/${path}`}
             style={{ borderRadius: 8 }}
             width={137}
             height={134}
@@ -42,7 +42,9 @@ const ImageSetting = ({
           {isEdit && (
             <Image
               onClick={onClickRemove}
-              src={"https://image.thetak.net/asset/product/images/bin_trash_gray_1.svg"}
+              src={
+                "https://image.thetak.net/asset/product/images/bin_trash_gray_1.svg"
+              }
               className="hoverItem"
               width={14}
               height={14}
@@ -53,7 +55,7 @@ const ImageSetting = ({
       ) : (
         <div
           style={{
-            background: COLORS.grayScale.gray4,
+            background: theme.colors.grayScale.gray4,
             borderRadius: 8,
             width: 137,
             height: 134,
@@ -133,7 +135,7 @@ const Container = styled.div`
   .gray_zone {
     width: 315px;
     padding: 6px 8px;
-    background: ${COLORS.grayScale.gray4};
+    background: ${({ theme }) => theme.colors.grayScale.gray4};
     font-size: 10px;
     line-height: 18px;
     margin: 4px 0px;

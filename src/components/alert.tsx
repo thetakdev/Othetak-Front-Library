@@ -1,6 +1,5 @@
 "use client";
 import { Modal } from "@mui/material";
-import { COLORS } from "@/styles/common";
 import styled from "@emotion/styled";
 import Button from '@/components/button';
 
@@ -79,7 +78,7 @@ const E_Container = styled.div`
   align-items: center;
   min-width: 308px;
   padding: 32px 80px;
-  background-color: ${COLORS.grayScale.white};
+  
   border-radius: 16px;
   box-shadow:
     0px 4px 6px -2px rgba(16, 24, 40, 0.03),
@@ -90,7 +89,7 @@ const E_Container = styled.div`
   }
 
   .title {
-    color: ${COLORS.grayScale.black};
+    
     font-size: 24px;
     font-weight: 700;
     line-height: normal;
@@ -100,7 +99,7 @@ const E_Container = styled.div`
 
   .subTitle {
     margin-top: 20px;
-    color: ${COLORS.grayScale.gray2};
+    
     font-size: 16px;
     font-weight: 500;
     line-height: normal;

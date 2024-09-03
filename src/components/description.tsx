@@ -25,14 +25,10 @@ export const DescriptionContainer = styled(Grid)<{ isLoading?: boolean }>`
 export const Description = styled(Grid)`
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mainColor.main3};
-
   border-collapse: collapse;
-  /* &:last-child&:not(:first-child) {
-    border-bottom: none;
-  } */
 
   &.noBorder {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 
   & > label {
@@ -60,6 +56,7 @@ export const Description = styled(Grid)`
     align-items: center;
     flex: 1;
     background: white;
+    box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 8px;

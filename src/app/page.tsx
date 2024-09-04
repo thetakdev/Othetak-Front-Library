@@ -36,36 +36,34 @@ const Page = () => {
   ];
 
   return (
-    <>
-      <SearchDetail
-        isLoading={false}
-        placeholder="제목을 입력해주세요."
-        onChange={onChange}
-        value={input}
-        onClickReset={handleClickReset}
-        onClickSearch={handleClickSearch}
-        selectOption={{
-          control: control,
-          name: "userTypeCode",
-          option: OPTIONS,
-          size: "tiny",
-          selectStyle: {width: 120}
-        }}
-      >
-        <Description item xs={4}>
-          <label>부서명</label>
-          <div className="content">ㅇ</div>
-        </Description>
-        <Description item xs={4}>
-          <label>부서명</label>
-          <div className="content">ㅇ</div>
-        </Description>
-        <Description item xs={4}>
-          <label>부서명</label>
-          <div className="content">ㅇ</div>
-        </Description>
-      </SearchDetail>
-    </>
+    <SearchDetail
+      isLoading={false}
+      placeholder="제목을 입력해주세요."
+      onChange={onChange}
+      value={input}
+      onClickReset={handleClickReset}
+      onClickSearch={handleClickSearch}
+      selectOption={{
+        control: control,
+        name: "userTypeCode",
+        option: OPTIONS,
+        size: "small",
+        selectStyle: { width: "120px" },
+      }}
+    >
+      <Description item xs={4}>
+        <label>부서명</label>
+        <div className="content">ㅇ</div>
+      </Description>
+      <Description item xs={4}>
+        <label>부서명</label>
+        <div className="content">ㅇ</div>
+      </Description>
+      <Description item xs={4}>
+        <label>부서명</label>
+        <div className="content">ㅇ</div>
+      </Description>
+    </SearchDetail>
   );
 };
 

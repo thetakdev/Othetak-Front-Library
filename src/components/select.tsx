@@ -48,6 +48,7 @@ function Select({
   multiSelect = false,
   allCheck = false,
   placeholder = "선택",
+  popperStyle,
 }: SELECT_PROPS) {
   const theme = useTheme();
   const ref = useRef<any>(null);
@@ -219,15 +220,13 @@ function Select({
                 height={imgSize}
               />
             </div>
-
             <StyledPopper
               size={size}
               placement="bottom"
               id={idRef.current}
               open={visible}
               anchorEl={anchorEl}
-              style={{ ...selectStyle, width: popperWidth }} // 여기서 popperWidth 사용
-              // style={selectStyle}
+              style={{ width: popperWidth, ...selectStyle, ...popperStyle }}
               theme={theme}
               ref={scrollContainer}
             >
@@ -283,29 +282,32 @@ const EContainer = styled.div<{
   display: inline-flex;
   box-sizing: border-box;
   position: relative;
+  max-width: ${({ selectStyle, size }) =>
+    selectStyle?.width || selectType[size].width};
   min-width: ${({ selectStyle, size }) =>
     selectStyle?.width || selectType[size].width};
+  /* outline: none; */
+
   .label-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: ${({ selectStyle, size }) =>
-      selectStyle?.width || selectType[size].width};
     height: ${({ selectStyle, size }) =>
       selectStyle?.height || selectType[size].height};
-    padding: ${({ selectStyle, size }) =>
-      selectStyle?.padding || selectType[size].padding};
+    box-sizing: border-box;
     color: ${({ theme }) => theme.colors.grayScale.black};
     background-color: ${({ theme }) => theme.colors.grayScale.white};
     border-radius: 8px;
-    border: 1px solid ${({ theme }) => theme.colors.grayScale.gray3};
     font-size: ${({ selectStyle, size }) =>
       selectStyle?.fontSize || selectType[size].fontSize};
     font-weight: ${({ selectStyle }) => selectStyle?.fontWeight || "400"};
     line-height: normal;
     cursor: pointer;
-    ${({ status, disabled, theme }) =>
-      STATUS_STYLE(theme)[disabled ? "disabled" : status]}
+    padding: ${({ selectStyle, size }) =>
+      selectStyle?.padding || selectType[size].padding};
+    ${({ status, disabled, theme, visible }) =>
+      STATUS_STYLE(theme, visible)[disabled ? "disabled" : status]}
+
     img {
       transform: ${({ visible }) => `rotate(${visible ? 180 : 360}deg)`};
       transition: 0.125s;
@@ -352,16 +354,14 @@ const StyledPopper = styled(Popper)<{
   .option {
     display: flex;
     align-items: center;
-    width: ${({ selectStyle, size }) =>
-      selectStyle?.width || selectType[size].width};
+
     height: ${({ selectStyle, size }) =>
       selectStyle?.height || selectType[size].height};
     overflow: scroll;
     overflow-x: hidden;
     padding-left: 14px;
     padding-right: 14px;
-    margin-left: -14px;
-    width: 100%;
+    margin-left: -8px;
 
     color: ${({ theme }) => theme.colors.grayScale.black};
     border-top: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};
@@ -417,20 +417,20 @@ const selectType = {
   },
 };
 
-const STATUS_STYLE = (theme: any) => ({
+const STATUS_STYLE = (theme: any, visible: boolean) => ({
   normal: {
     backgroundColor: theme.colors.grayScale.white,
-    border: `1px solid ${theme.colors.grayScale.gray3}`,
+    border: `1px solid ${visible ? theme.colors.mainColor.main : theme.colors.grayScale.gray3}`,
     color: theme.colors.grayScale.black,
   },
   error: {
     backgroundColor: theme.colors.errorColor.error3,
-    border: `1px solid ${theme.colors.errorColor.errorMain}`,
+    border: `1px solid ${visible ? theme.colors.mainColor.main : theme.colors.errorColor.errorMain}`,
     color: theme.colors.grayScale.black,
   },
   disabled: {
     backgroundColor: theme.colors.grayScale.gray4,
-    border: `1px solid ${theme.colors.grayScale.gray3}`,
+    border: `1px solid ${visible ? theme.colors.mainColor.main : theme.colors.grayScale.gray3}`,
     color: theme.colors.grayScale.gray3,
   },
 });

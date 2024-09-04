@@ -1,6 +1,6 @@
 {
   "name": "thetak-library",
-  "version": "0.1.36",
+  "version": "0.1.37.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

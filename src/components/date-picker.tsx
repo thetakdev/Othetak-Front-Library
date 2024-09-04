@@ -6,7 +6,7 @@ import {
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ko } from "date-fns/locale";
-import { Paper } from "@mui/material";
+import { Paper, TextField } from "@mui/material";
 import Image from "next/image";
 import Checkbox from "./checkbox";
 import styled from "@emotion/styled";
@@ -82,6 +82,16 @@ export default forwardRef(function DatePicker(
               width={16}
               height={16}
               alt="calendar"
+            />
+          ),
+          textField: (params) => (
+            <TextField
+              {...params}
+              InputProps={{
+                ...params.InputProps,
+                onKeyDown: (e) => e.preventDefault(),
+                onChange: (e) => e.preventDefault(),
+              }}
             />
           ),
         }}

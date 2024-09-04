@@ -42,6 +42,8 @@ export default forwardRef(function DatePicker(
         {...rest}
         InputProps={{
           ...rest.InputProps,
+          onKeyDown: (e) => e.preventDefault(),
+          onChange: (e) => e.preventDefault()
         }}
       />
     ),

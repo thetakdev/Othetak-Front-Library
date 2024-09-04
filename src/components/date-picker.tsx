@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useCallback } from "react";
 import {
   DatePicker as MuiDatePicker,
   LocalizationProvider,
@@ -6,7 +6,7 @@ import {
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ko } from "date-fns/locale";
-import { Paper, TextField } from "@mui/material";
+import { Paper, TextField, TextFieldProps } from "@mui/material";
 import Image from "next/image";
 import Checkbox from "./checkbox";
 import styled from "@emotion/styled";
@@ -35,6 +35,18 @@ export default forwardRef(function DatePicker(
   ref: any
 ) {
   const [visible, setVisible] = useState(false);
+
+  const PickerTextField = useCallback(
+    ({ ...rest }: TextFieldProps) => (
+      <TextField
+        {...rest}
+        InputProps={{
+          ...rest.InputProps,
+        }}
+      />
+    ),
+    []
+  );
 
   return (
     <LocalizationProvider
@@ -84,16 +96,7 @@ export default forwardRef(function DatePicker(
               alt="calendar"
             />
           ),
-          textField: (params) => (
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                onKeyDown: (e) => e.preventDefault(),
-                onChange: (e) => e.preventDefault(),
-              }}
-            />
-          ),
+          textField: PickerTextField,
         }}
         visible={visible}
         onOpen={() => setVisible(true)}

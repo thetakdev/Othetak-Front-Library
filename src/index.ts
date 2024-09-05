@@ -13,6 +13,7 @@ export { default as SearchAddress } from "./components/search-address";
 export { default as SearchDetail } from "./components/search-detail";
 export { default as Select } from "./components/select";
 export { default as Toggle } from "./components/toggle-switch";
+export { default as Pagination } from "./components/pagination";
 
 // hooks
 export { default as useClickOutSide } from "./hooks/use-click-outside";

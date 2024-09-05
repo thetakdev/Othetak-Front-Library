@@ -3,6 +3,7 @@ import { Description } from "@/components/description";
 import SearchDetail from "@/components/search-detail";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const meta: Meta<typeof SearchDetail> = {
   title: "components/SearchDetail/SearchDetail",
@@ -15,13 +16,14 @@ type Story = StoryObj<typeof SearchDetail>;
 
 export const PrimarySearchDetail: Story = {
   render: () => {
-    const [input, setInput] = useState("");
-    const onChange = (e: any) => {
-      setInput(e.target.value);
-    };
+    const { register, setValue } = useForm({
+      defaultValues: {
+        searchWord: "",
+      },
+    });
 
     const handleClickReset = () => {
-      setInput("");
+      setValue("searchWord", "");
     };
 
     const handleClickSearch = () => {
@@ -32,11 +34,12 @@ export const PrimarySearchDetail: Story = {
       <>
         <SearchDetail
           isLoading={false}
-          placeholder="제목을 입력해주세요."
-          onChange={onChange}
-          value={input}
           onClickReset={handleClickReset}
           onClickSearch={handleClickSearch}
+          inputOption={{
+            register,
+            name: "searchWord",
+          }}
         >
           <Description item xs={4}>
             <label>부서명</label>

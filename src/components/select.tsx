@@ -1,20 +1,20 @@
-"use client";
-import { Controller } from "react-hook-form";
-import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import styled from "@emotion/styled";
-import { Popper } from "@mui/material";
-import Checkbox from "./checkbox";
-import useClickOutside from "@/hooks/use-click-outside";
-import { useTheme } from "@emotion/react";
+'use client';
+import { Controller } from 'react-hook-form';
+import React, { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
+import styled from '@emotion/styled';
+import { Popper } from '@mui/material';
+import useClickOutside from '@/hooks/use-click-outside';
+import { useTheme } from '@emotion/react';
+import Checkbox from './checkbox';
 
 export interface SelectOptionType {
   label: string;
   value: string | number | boolean;
 }
 
-type Size = "tiny" | "small" | "normal" | "big" | "responsive";
-type Status = "normal" | "error";
+type Size = 'tiny' | 'small' | 'normal' | 'big' | 'responsive';
+type Status = 'normal' | 'error';
 export interface SELECT_PROPS {
   className?: string;
   control: any;
@@ -43,34 +43,33 @@ function Select({
   labelStyle,
   optionStyle,
   disabled = false,
-  size = "normal",
-  status = "normal",
+  size = 'normal',
+  status = 'normal',
   multiSelect = false,
   allCheck = false,
-  placeholder = "선택",
+  placeholder = '선택',
   popperStyle,
 }: SELECT_PROPS) {
   const theme = useTheme();
   const ref = useRef<any>(null);
   const [visible, setVisible] = useState(false);
   useClickOutside({ ref1: ref }, () => setVisible(false));
-  const [selectedOptions, setSelectedOptions] = useState<SelectOptionType[]>(
-    []
-  );
+  const [selectedOptions, setSelectedOptions] = useState<SelectOptionType[]>([]);
   const [filteredOptions, setFilteredOptions] = useState(option);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [focusedIndex, setFocusedIndex] = useState(0);
 
   useEffect(() => {
     if (visible === false) {
-      setSearchTerm("");
+      setSearchTerm('');
       initOption();
     }
   }, [visible]);
 
   const initOption = () => {
     if (allCheck) {
-      const allOption: SelectOptionType = { label: "전체", value: "all" };
+      const allOption: SelectOptionType = { label: '전체', value: null };
+
       setFilteredOptions([allOption, ...option]);
     } else {
       setFilteredOptions(option);
@@ -83,12 +82,15 @@ function Select({
 
   useEffect(() => {
     setFocusedIndex(0);
+    if (searchTerm === '') {
+      initOption();
+    }
   }, [searchTerm]);
 
   // 옵션 선택
-  const handleOptionClick = (el: SelectOptionType, onChange: any) => {
+  const handleOptionClick = (el: SelectOptionType, onChange: (rest: any) => any) => {
     if (multiSelect) {
-      if (el.value === "all") {
+      if (el.value === null) {
         if (selectedOptions.length === option.length) {
           setSelectedOptions([]);
           onChange([]);
@@ -97,9 +99,7 @@ function Select({
           onChange(option.map((opt) => opt.value));
         }
       } else {
-        const alreadySelected = selectedOptions.some(
-          (option) => option.value === el.value
-        );
+        const alreadySelected = selectedOptions.some((option) => option.value === el.value);
         const newSelectedOptions = alreadySelected
           ? selectedOptions.filter((option) => option.value !== el.value)
           : [...selectedOptions, el];
@@ -117,9 +117,7 @@ function Select({
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
-    setFilteredOptions(
-      option.filter((opt) => opt.label.toLowerCase().includes(searchValue))
-    );
+    setFilteredOptions(option.filter((opt) => opt.label.toLowerCase().includes(searchValue)));
   };
 
   // 방향키로 아이템 선택
@@ -128,15 +126,13 @@ function Select({
       setVisible(true);
       return;
     }
-    if (e.key === "ArrowDown") {
+    if (e.key === 'ArrowDown') {
       e.preventDefault();
       setFocusedIndex((prev) => (prev + 1) % filteredOptions.length);
-    } else if (e.key === "ArrowUp") {
+    } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setFocusedIndex(
-        (prev) => (prev - 1 + filteredOptions.length) % filteredOptions.length
-      );
-    } else if (e.key === "Enter") {
+      setFocusedIndex((prev) => (prev - 1 + filteredOptions.length) % filteredOptions.length);
+    } else if (e.key === 'Enter') {
       e.preventDefault();
       if (Boolean(filteredOptions[focusedIndex]) === false) return;
       handleOptionClick(filteredOptions[focusedIndex], onChange);
@@ -144,18 +140,18 @@ function Select({
   };
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const idRef = useRef("simple-popper");
+  const idRef = useRef('simple-popper');
 
   // 셀렉트박스 클릭
   const handleClick = React.useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       if (disabled) return;
-      idRef.current = "simple-popper";
+      idRef.current = 'simple-popper';
       setAnchorEl(event.currentTarget);
       setVisible(!visible);
       event.preventDefault();
     },
-    [visible, disabled]
+    [visible, disabled],
   );
 
   const scrollContainer = useRef(null);
@@ -171,7 +167,7 @@ function Select({
     }
   }, [focusedIndex, scrollContainer]);
 
-  const [popperWidth, setPopperWidth] = useState<string | number>("auto"); // Popper 너비 상태 추가
+  const [popperWidth, setPopperWidth] = useState<string | number>('auto'); // Popper 너비 상태 추가
 
   useEffect(() => {
     // EContainer의 너비를 가져와 Popper의 너비로 설정
@@ -185,7 +181,24 @@ function Select({
       name={name}
       control={control}
       render={({ field: { value, onChange } }) => {
-        const labels = selectedOptions.map((option) => option.label).join(", ");
+        const getSelected = () => {
+          let result = placeholder;
+          if (multiSelect) {
+            if (value.length === 0 || option.length === value.length) {
+              result = placeholder;
+            } else {
+              result = option
+                .filter((option) => value?.includes(option?.value)) // value 배열에 있는 값들만 필터링
+                .map((option) => option?.label) // 해당 값들의 label만 추출
+                .join(', '); // 결과를 ', '로 연결하여 반환
+            }
+          } else {
+            result = value === null ? placeholder : option?.find((option) => option.value === value)?.label;
+          }
+
+          return result;
+        };
+
         return (
           <EContainer
             className={className}
@@ -206,15 +219,11 @@ function Select({
                 value={searchTerm}
                 disabled={disabled}
                 onChange={handleSearch}
-                placeholder={
-                  option.length === selectedOptions.length
-                    ? placeholder
-                    : labels || placeholder
-                }
-                style={{ border: "none", outline: "none", width: "100%" }}
+                placeholder={getSelected()}
+                style={{ border: 'none', outline: 'none', width: '100%' }}
               />
               <Image
-                src={`https://image.thetak.net/asset/product/images/${disabled ? "arrow_down_gray_25" : "arrow_down_gray_2"}.svg`}
+                src={`https://image.thetak.net/asset/product/images/${disabled ? 'arrow_down_gray_25' : 'arrow_down_gray_2'}.svg`}
                 alt="arrow"
                 width={imgSize}
                 height={imgSize}
@@ -231,30 +240,22 @@ function Select({
               ref={scrollContainer}
             >
               {filteredOptions.map((el, index) => {
-                const isSelected = selectedOptions.some(
-                  (option) => option.value === el.value
-                );
+                const isSelected = selectedOptions.some((option) => option.value === el.value);
                 return (
                   <div
-                    className={`option ${isSelected ? "selected" : ""} ${index === focusedIndex ? "focused" : ""}`}
+                    className={`option ${isSelected ? 'selected' : ''} ${index === focusedIndex ? 'focused' : ''}`}
                     key={index}
                     onClick={(e) => {
                       handleOptionClick(el, onChange);
                       e.stopPropagation();
                     }}
                     style={{
-                      borderTop: index === 0 ? "none" : "",
+                      borderTop: index === 0 ? 'none' : '',
                       ...optionStyle,
                     }}
                   >
-                    {multiSelect && el.label !== "전체" ? (
-                      <Checkbox
-                        onChange={() => {}}
-                        style={{ gap: 12 }}
-                        shape="square"
-                        checked={isSelected}
-                        label={el.label}
-                      />
+                    {multiSelect && el.label !== '전체' ? (
+                      <Checkbox onChange={() => {}} style={{ gap: 12 }} shape="square" checked={isSelected} label={el.label} />
                     ) : (
                       el.label
                     )}
@@ -276,37 +277,30 @@ const EContainer = styled.div<{
   selectStyle?: React.CSSProperties;
   disabled: boolean;
   size: Size;
-  status?: "normal" | "error";
+  status?: 'normal' | 'error';
   theme: any;
 }>`
   display: inline-flex;
   box-sizing: border-box;
   position: relative;
-  max-width: ${({ selectStyle, size }) =>
-    selectStyle?.width || selectType[size].width};
-  min-width: ${({ selectStyle, size }) =>
-    selectStyle?.width || selectType[size].width};
-  /* outline: none; */
+  max-width: ${({ selectStyle, size }) => selectStyle?.width || selectType[size].width};
+  min-width: ${({ selectStyle, size }) => selectStyle?.width || selectType[size].width};
 
   .label-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: ${({ selectStyle, size }) =>
-      selectStyle?.height || selectType[size].height};
+    height: ${({ selectStyle, size }) => selectStyle?.height || selectType[size].height};
     box-sizing: border-box;
     color: ${({ theme }) => theme.colors.grayScale.black};
     background-color: ${({ theme }) => theme.colors.grayScale.white};
     border-radius: 8px;
-    font-size: ${({ selectStyle, size }) =>
-      selectStyle?.fontSize || selectType[size].fontSize};
-    font-weight: ${({ selectStyle }) => selectStyle?.fontWeight || "400"};
+    font-size: ${({ selectStyle, size }) => selectStyle?.fontSize || selectType[size].fontSize};
+    font-weight: ${({ selectStyle }) => selectStyle?.fontWeight || '400'};
     line-height: normal;
     cursor: pointer;
-    padding: ${({ selectStyle, size }) =>
-      selectStyle?.padding || selectType[size].padding};
-    ${({ status, disabled, theme, visible }) =>
-      STATUS_STYLE(theme, visible)[disabled ? "disabled" : status]}
+    padding: ${({ selectStyle, size }) => selectStyle?.padding || selectType[size].padding};
+    ${({ status, disabled, theme, visible }) => STATUS_STYLE(theme, visible)[disabled ? 'disabled' : status]}
 
     img {
       transform: ${({ visible }) => `rotate(${visible ? 180 : 360}deg)`};
@@ -332,14 +326,7 @@ const StyledPopper = styled(Popper)<{
   theme: any;
 }>`
   position: absolute;
-  top: ${({ selectStyle, size }) =>
-    selectStyle?.height
-      ? `calc(${selectStyle.height} + 2px)`
-      : selectType[size].height};
-  width: ${({ selectStyle, size }) =>
-    selectStyle?.width || selectType[size].width};
-  padding: ${({ selectStyle, size }) =>
-    selectStyle?.padding || selectType[size].padding};
+  top: ${({ selectStyle, size }) => (selectStyle?.height ? `calc(${selectStyle.height} + 2px)` : selectType[size].height)};
   box-sizing: border-box;
   padding-top: 0px;
   background-color: ${({ theme }) => theme.colors.grayScale.white};
@@ -347,27 +334,20 @@ const StyledPopper = styled(Popper)<{
   border: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 3;
+  z-index: 100;
   cursor: pointer;
   max-height: 300px;
-
   .option {
     display: flex;
     align-items: center;
-
-    height: ${({ selectStyle, size }) =>
-      selectStyle?.height || selectType[size].height};
+    height: ${({ selectStyle, size }) => selectStyle?.height || selectType[size].height};
     overflow: scroll;
     overflow-x: hidden;
-    padding-left: 14px;
-    padding-right: 14px;
-    margin-left: -8px;
-
+    padding: ${({ selectStyle, size }) => selectStyle?.padding || selectType[size].padding};
     color: ${({ theme }) => theme.colors.grayScale.black};
     border-top: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};
-    font-size: ${({ selectStyle, size }) =>
-      selectStyle?.fontSize || selectType[size].fontSize};
-    font-weight: ${({ selectStyle }) => selectStyle?.fontWeight || "400"};
+    font-size: ${({ selectStyle, size }) => selectStyle?.fontSize || selectType[size].fontSize};
+    font-weight: ${({ selectStyle }) => selectStyle?.fontWeight || '400'};
     line-height: normal;
 
     &.selected {
@@ -386,34 +366,34 @@ const StyledPopper = styled(Popper)<{
 
 const selectType = {
   tiny: {
-    width: "89px",
-    height: "28px",
-    padding: "0px 8px",
-    fontSize: "12px",
+    width: '89px',
+    height: '28px',
+    padding: '0px 8px',
+    fontSize: '12px',
   },
   small: {
-    width: "89px",
-    height: "32px",
-    padding: "4px 8px",
-    fontSize: "12px",
+    width: '89px',
+    height: '32px',
+    padding: '4px 8px',
+    fontSize: '12px',
   },
   normal: {
-    width: "290px",
-    height: "44px",
-    padding: "10px 14px",
-    fontSize: "16px",
+    width: '290px',
+    height: '44px',
+    padding: '10px 14px',
+    fontSize: '16px',
   },
   big: {
-    width: "427px",
-    height: "44px",
-    padding: "10px 14px",
-    fontSize: "16px",
+    width: '427px',
+    height: '44px',
+    padding: '10px 14px',
+    fontSize: '16px',
   },
   responsive: {
-    width: "100%",
-    height: "32px",
-    padding: "4px 8px",
-    fontSize: "12px",
+    width: '100%',
+    height: '32px',
+    padding: '4px 8px',
+    fontSize: '12px',
   },
 };
 

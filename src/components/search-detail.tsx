@@ -166,7 +166,7 @@ const StyledCollapse = styled(Collapse)`
   left: -1px;
   top: 23px;
   width: 100%;
-  z-index: 9999;
+  z-index: 100;
   .container {
     padding: 16px 30px 32px 30px;
     box-shadow:

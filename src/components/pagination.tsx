@@ -8,7 +8,7 @@ import {
   PaginationItem,
   Stack,
 } from "@mui/material";
-import { COLORS } from "@/styles/common";
+import { useTheme } from "@emotion/react";
 
 export type PAGINATION_TYPE = {
   page?: number; // 현재 페이지
@@ -23,12 +23,10 @@ export interface PAGINATION_PROPS {
   isLoading: boolean;
 }
 
-export default function PaginationComp({
-  pageData,
-  onChange,
-  isLoading,
-}: PAGINATION_PROPS) {
+function PaginationComp({ pageData, onChange, isLoading }: PAGINATION_PROPS) {
   const [myPage, setMyPage] = useState("");
+
+  const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     onChange(value);
@@ -80,7 +78,9 @@ export default function PaginationComp({
             color="secondary"
             onChange={handleChange}
             sx={{
-              "& .Mui-selected": { backgroundColor: COLORS.mainColor.main1 },
+              "& .Mui-selected": {
+                backgroundColor: theme.colors.mainColor.main1,
+              },
               "& .MuiPaginationItem-root": { fontWeight: 500 },
             }}
             renderItem={(item) => (
@@ -126,7 +126,7 @@ export default function PaginationComp({
               width: 109,
               height: 28,
               display: "flex",
-              border: `1px solid ${COLORS.grayScale.gray3}`,
+              border: `1px solid ${theme.colors.grayScale.gray3}`,
               borderRadius: "6px",
               pl: "6px",
             }}
@@ -159,3 +159,5 @@ export default function PaginationComp({
     </Box>
   );
 }
+
+export default PaginationComp;

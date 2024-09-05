@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Collapse, Grid } from "@mui/material";
 import Select, { SELECT_PROPS } from "./select";
-import Input from "./input";
+import Input, { INPUT_PROPS } from "./input";
 import { useTheme } from "@emotion/react";
 import Button from "./button";
 
@@ -11,10 +11,8 @@ interface Props {
   children?: React.ReactNode;
   onClickReset: () => void;
   onClickSearch: () => void;
-  value: string;
-  onChange: (e: any) => void;
-  placeholder?: string;
   selectOption?: SELECT_PROPS;
+  inputOption?: INPUT_PROPS;
   isLoading: boolean;
 }
 
@@ -22,9 +20,7 @@ const SearchDetail = ({
   children,
   onClickReset,
   onClickSearch,
-  value,
-  onChange,
-  placeholder,
+  inputOption,
   selectOption,
   isLoading,
 }: Props) => {
@@ -70,9 +66,6 @@ const SearchDetail = ({
       <div className="inputWrapper">
         {selectOption ? <Select {...selectOption} /> : <></>}
         <Input
-          value={value}
-          placeholder={placeholder}
-          onChange={onChange}
           size="responsive"
           onKeyDown={(e) => handleKeyDownEnter(e as any, handleClickSearch)}
           adornment={
@@ -105,6 +98,7 @@ const SearchDetail = ({
                 }
               : undefined
           }
+          {...inputOption}
         />
 
         {children ? (

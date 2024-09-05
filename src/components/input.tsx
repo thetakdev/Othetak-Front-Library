@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 type SizeType = "big" | "small" | "tiny" | "responsive";
 type StatusType = "normal" | "error";
 
-interface Props extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
+export interface INPUT_PROPS extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
   className?: string;
   register?: any;
   name?: string;
@@ -35,7 +35,7 @@ export default forwardRef(function Input(
     size = "big",
     status = "normal",
     ...rest
-  }: Props,
+  }: INPUT_PROPS,
   ref
 ) {
   return (

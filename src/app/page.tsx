@@ -22,7 +22,7 @@ const Page = () => {
     userTypeCode: 2,
   };
 
-  const { control, getValues } = useForm({
+  const { control, register } = useForm({
     defaultValues: initialParams,
   });
 
@@ -38,9 +38,6 @@ const Page = () => {
   return (
     <SearchDetail
       isLoading={false}
-      placeholder="제목을 입력해주세요."
-      onChange={onChange}
-      value={input}
       onClickReset={handleClickReset}
       onClickSearch={handleClickSearch}
       selectOption={{
@@ -49,6 +46,9 @@ const Page = () => {
         option: OPTIONS,
         size: "small",
         selectStyle: { width: "120px" },
+      }}
+      inputOption={{
+        register,
       }}
     >
       <Description item xs={4}>

@@ -1,7 +1,6 @@
 "use client";
 import { Modal as CustomModal } from "@mui/material";
 import Image from "next/image";
-import { COLORS } from "@/styles/common";
 import styled from "@emotion/styled";
 
 interface Props {

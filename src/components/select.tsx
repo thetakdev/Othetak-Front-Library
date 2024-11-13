@@ -3,10 +3,11 @@ import { Controller } from 'react-hook-form';
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
-import { Popper } from '@mui/material';
+import { CircularProgress, Popper } from '@mui/material';
 import useClickOutside from '@/hooks/use-click-outside';
 import { useTheme } from '@emotion/react';
 import Checkbox from './checkbox';
+
 
 export interface SelectOptionType {
   label: string;
@@ -25,12 +26,16 @@ export interface SELECT_PROPS {
   labelStyle?: React.CSSProperties;
   popperStyle?: React.CSSProperties;
   optionStyle?: React.CSSProperties;
+  inputStyle?: React.CSSProperties;
   disabled?: boolean;
   size?: Size;
   status?: Status;
   multiSelect?: boolean;
   allCheck?: boolean;
   placeholder?: string;
+  onChange?: () => void;
+  isLoading?: boolean;
+  labelComponent?: any;
 }
 
 function Select({
@@ -42,13 +47,17 @@ function Select({
   selectStyle,
   labelStyle,
   optionStyle,
+  inputStyle,
   disabled = false,
-  size = 'normal',
+  size = 'small',
   status = 'normal',
   multiSelect = false,
   allCheck = false,
   placeholder = '선택',
   popperStyle,
+  isLoading,
+  labelComponent,
+  onChange,
 }: SELECT_PROPS) {
   const theme = useTheme();
   const ref = useRef<any>(null);
@@ -78,7 +87,7 @@ function Select({
 
   useEffect(() => {
     initOption();
-  }, []);
+  }, [option]);
 
   useEffect(() => {
     setFocusedIndex(0);
@@ -88,15 +97,15 @@ function Select({
   }, [searchTerm]);
 
   // 옵션 선택
-  const handleOptionClick = (el: SelectOptionType, onChange: (rest: any) => any) => {
+  const handleOptionClick = (el: SelectOptionType, _onChange: (rest: any) => any) => {
     if (multiSelect) {
       if (el.value === null) {
         if (selectedOptions.length === option.length) {
           setSelectedOptions([]);
-          onChange([]);
+          _onChange([]);
         } else {
           setSelectedOptions(option);
-          onChange(option.map((opt) => opt.value));
+          _onChange(option.map((opt) => opt.value));
         }
       } else {
         const alreadySelected = selectedOptions.some((option) => option.value === el.value);
@@ -104,13 +113,14 @@ function Select({
           ? selectedOptions.filter((option) => option.value !== el.value)
           : [...selectedOptions, el];
         setSelectedOptions(newSelectedOptions);
-        onChange(newSelectedOptions.map((option) => option.value));
+        _onChange(newSelectedOptions.map((option) => option.value));
       }
     } else {
       setSelectedOptions([el]);
-      onChange(el.value);
+      _onChange(el.value);
       setVisible(false);
     }
+    onChange && onChange();
   };
 
   // 검색
@@ -176,24 +186,44 @@ function Select({
     }
   }, [visible, ref.current]); // visible 또는 ref가 변경될 때마다 재계산
 
+  const getDisabled = () => {
+    if (Boolean(option?.length) === false || isLoading || disabled) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Controller
       name={name}
       control={control}
       render={({ field: { value, onChange } }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useEffect(() => {
+          if (multiSelect) {
+            if (value) {
+              const initialSelected = option.filter((opt) => value.includes(opt.value));
+              setSelectedOptions(initialSelected);
+            }
+          }
+        }, [value]);
+
         const getSelected = () => {
           let result = placeholder;
           if (multiSelect) {
-            if (value.length === 0 || option.length === value.length) {
-              result = placeholder;
-            } else {
-              result = option
-                .filter((option) => value?.includes(option?.value)) // value 배열에 있는 값들만 필터링
-                .map((option) => option?.label) // 해당 값들의 label만 추출
-                .join(', '); // 결과를 ', '로 연결하여 반환
+            if (Boolean(value)) {
+              if (value?.length === 0 || option.length === value?.length) {
+                result = placeholder;
+              } else {
+                result = option
+                  .filter((option) => value?.includes(option?.value)) // value 배열에 있는 값들만 필터링
+                  .map((option) => option?.label) // 해당 값들의 label만 추출
+                  .join(', '); // 결과를 ', '로 연결하여 반환
+              }
             }
           } else {
-            result = value === null ? placeholder : option?.find((option) => option.value === value)?.label;
+            result = value === null || value === '' ? placeholder : option?.find((option) => option.value === value)?.label;
           }
 
           return result;
@@ -208,39 +238,52 @@ function Select({
             onKeyDown={(e) => handleKeyDown(e, onChange)}
             tabIndex={0}
             selectStyle={selectStyle}
-            disabled={disabled}
+            disabled={getDisabled()}
             size={size}
             status={status}
             theme={theme}
           >
             <div className="label-wrapper" style={labelStyle}>
+              {labelComponent && <div className="labelComponent">{labelComponent}</div>}
               <input
                 type="text"
                 value={searchTerm}
-                disabled={disabled}
+                disabled={getDisabled()}
                 onChange={handleSearch}
                 placeholder={getSelected()}
-                style={{ border: 'none', outline: 'none', width: '100%' }}
+                style={{ border: 'none', outline: 'none', width: '100%', ...inputStyle }}
               />
-              <Image
-                src={`https://image.thetak.net/asset/product/images/${disabled ? 'arrow_down_gray_25' : 'arrow_down_gray_2'}.svg`}
-                alt="arrow"
-                width={imgSize}
-                height={imgSize}
-              />
+              {isLoading ? (
+                <CircularProgress size={14} />
+              ) : (
+                <Image
+                  src={`https://image.thetak.net/asset/product/images/${disabled ? 'arrow_down_gray_25' : 'arrow_down_gray_2'}.svg`}
+                  alt="arrow"
+                  width={imgSize}
+                  height={imgSize}
+                />
+              )}
             </div>
+
             <StyledPopper
               size={size}
               placement="bottom"
               id={idRef.current}
               open={visible}
               anchorEl={anchorEl}
-              style={{ width: popperWidth, ...selectStyle, ...popperStyle }}
+              style={{ width: popperWidth || selectStyle?.width, ...popperStyle }}
               theme={theme}
               ref={scrollContainer}
             >
-              {filteredOptions.map((el, index) => {
-                const isSelected = selectedOptions.some((option) => option.value === el.value);
+              {filteredOptions?.map((el, index) => {
+                let isSelected = false;
+
+                if (multiSelect) {
+                  isSelected = value?.includes(el.value);
+                } else {
+                  isSelected = value === el.value;
+                }
+
                 return (
                   <div
                     className={`option ${isSelected ? 'selected' : ''} ${index === focusedIndex ? 'focused' : ''}`}
@@ -255,7 +298,13 @@ function Select({
                     }}
                   >
                     {multiSelect && el.label !== '전체' ? (
-                      <Checkbox onChange={() => {}} style={{ gap: 12 }} shape="square" checked={isSelected} label={el.label} />
+                      <Checkbox
+                        onClick={() => handleOptionClick(el, onChange)}
+                        style={{ gap: 12 }}
+                        shape="square"
+                        checked={isSelected}
+                        label={el.label}
+                      />
                     ) : (
                       el.label
                     )}
@@ -286,11 +335,17 @@ const EContainer = styled.div<{
   max-width: ${({ selectStyle, size }) => selectStyle?.width || selectType[size].width};
   min-width: ${({ selectStyle, size }) => selectStyle?.width || selectType[size].width};
 
+  .labelComponent {
+    width: auto;
+  }
+
   .label-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: ${({ selectStyle, size }) => selectStyle?.height || selectType[size].height};
+    max-width: ${({ selectStyle, size }) => selectStyle?.width || selectType[size].width};
+    min-width: ${({ selectStyle, size }) => selectStyle?.width || selectType[size].width};
     box-sizing: border-box;
     color: ${({ theme }) => theme.colors.grayScale.black};
     background-color: ${({ theme }) => theme.colors.grayScale.white};
@@ -334,9 +389,10 @@ const StyledPopper = styled(Popper)<{
   border: 1px solid ${({ theme }) => theme.colors.grayScale.gray4};
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 100;
+  z-index: 99999;
   cursor: pointer;
   max-height: 300px;
+
   .option {
     display: flex;
     align-items: center;
@@ -372,7 +428,7 @@ const selectType = {
     fontSize: '12px',
   },
   small: {
-    width: '89px',
+    width: '150px',
     height: '32px',
     padding: '4px 8px',
     fontSize: '12px',

@@ -1,7 +1,8 @@
-"use client";
-import { Modal as CustomModal } from "@mui/material";
-import Image from "next/image";
-import styled from "@emotion/styled";
+'use client';
+import { Modal as CustomModal } from '@mui/material';
+import Image from 'next/image';
+import { COLORS } from '@/styles/common';
+import styled from '@emotion/styled';
 
 interface Props {
   open: boolean;
@@ -12,6 +13,7 @@ interface Props {
   closeSize?: number;
   closeStyle?: React.CSSProperties;
   children: React.ReactNode;
+  title?: string;
 }
 
 export default function Modal({
@@ -23,16 +25,16 @@ export default function Modal({
   closeSize = 24,
   closeStyle,
   children,
+  title,
 }: Props) {
   return (
     <CustomModal open={open} onClose={onClose} hideBackdrop={hideBackdrop}>
       <EContainer style={style}>
+        {title && <h3 className="title">{title}</h3>}
         {isClose && (
           <Image
             className="close"
-            src={
-              "https://image.thetak.net/asset/product/images/x_close_gray_2.svg"
-            }
+            src={'https://image.thetak.net/asset/product/images/x_close_gray_2.svg'}
             alt="close"
             width={closeSize}
             height={closeSize}
@@ -48,16 +50,21 @@ export default function Modal({
 
 const EContainer = styled.div<{ style?: React.CSSProperties }>`
   position: absolute;
-  top: ${({ style }) => (style?.top ? style.top : "50%")};
+  top: ${({ style }) => (style?.top ? style.top : '50%')};
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 30px;
-  background-color: ${({ theme }) => theme.colors.grayScale.white};
+  background-color: ${COLORS.grayScale.white};
   border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.colors.grayScale.gray3};
+  border: 1px solid ${COLORS.grayScale.gray3};
 
   :focus {
     outline: none;
+  }
+
+  .title {
+    margin: 0px;
+    margin-bottom: 20px;
   }
 
   .close {

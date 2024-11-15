@@ -1,4 +1,4 @@
-import { useState, forwardRef, useCallback } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import {
   DatePicker as MuiDatePicker,
   LocalizationProvider,
@@ -6,11 +6,13 @@ import {
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ko } from "date-fns/locale";
-import { Paper, TextField, TextFieldProps } from "@mui/material";
+import { Paper } from "@mui/material";
 import Image from "next/image";
 import Checkbox from "./checkbox";
 import styled from "@emotion/styled";
-
+import { HOURS, MINUTES } from "@/lib/static/common";
+import { useForm } from "react-hook-form";
+import Select from "./select";
 interface Props {
   name: string;
   value: Date;
@@ -20,7 +22,13 @@ interface Props {
   maxDate?: Date;
   isEndDate?: boolean;
   style?: any;
+  time?: boolean;
 }
+
+const initialTime = {
+  hours: "00",
+  minutes: "00",
+};
 export default forwardRef(function DatePicker(
   {
     name,
@@ -31,37 +39,40 @@ export default forwardRef(function DatePicker(
     maxDate,
     isEndDate = false,
     style,
+    time,
   }: Props,
   ref: any
 ) {
   const [visible, setVisible] = useState(false);
+  const { control, getValues, setValue } = useForm({
+    defaultValues: initialTime,
+  });
 
-  const PickerTextField = useCallback(
-    ({ ...rest }: TextFieldProps) => (
-      <TextField
-        {...rest}
-        InputProps={{
-          ...rest.InputProps,
-          onKeyDown: (e) => e.preventDefault(),
-          onChange: (e) => e.preventDefault()
-        }}
-      />
-    ),
-    []
-  );
+  useEffect(() => {
+    if (time && isEndDate === false) {
+      const hours = String(value.getHours()).padStart(2, "0");
+      const minutes = String(value.getMinutes()).padStart(2, "0");
+      setValue("hours", hours);
+      setValue("minutes", minutes);
+    }
+  }, [time, value, isEndDate]);
+
+  const handleChangeTime = () => {
+    value.setHours(Number(getValues("hours")));
+    value.setMinutes(Number(getValues("minutes")));
+
+    onChange(value, name);
+  };
 
   return (
-    <LocalizationProvider
-      dateAdapter={AdapterDateFns}
-      adapterLocale={ko as any}
-    >
+    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ko}>
       <CustomDatePicker
         name={name}
         sx={style}
         value={value}
         onChange={(e: any) => onChange(e, name)}
-        minDate={new Date(minDate)}
-        maxDate={new Date(maxDate)}
+        minDate={minDate && new Date(minDate)}
+        maxDate={maxDate && new Date(maxDate)}
         format="yyyy.MM.dd"
         disabled={disabled}
         slots={{
@@ -88,22 +99,41 @@ export default forwardRef(function DatePicker(
             <Image
               src={
                 disabled
-                  ? "https://image.thetak.net/asset/product/images/calender_admin_3.svg"
+                  ? "/images/calender/calender_disabled.svg"
                   : visible
-                    ? "https://image.thetak.net/asset/product/images/calender_admin_main.svg"
-                    : "https://image.thetak.net/asset/product/images/calender_admin_3.svg"
+                    ? "/images/calender/calender_admin_main.svg"
+                    : "/images/calender/calender_admin3.svg"
               }
               width={16}
               height={16}
               alt="calendar"
             />
           ),
-          textField: PickerTextField,
         }}
         visible={visible}
         onOpen={() => setVisible(true)}
         onClose={() => setVisible(false)}
       />
+      {time && (
+        <TimeWrapper>
+          <Select
+            selectStyle={{ width: "70px" }}
+            option={HOURS}
+            name="hours"
+            onChange={handleChangeTime}
+            control={control}
+          />
+          시
+          <Select
+            selectStyle={{ width: "70px" }}
+            option={MINUTES}
+            name="minutes"
+            onChange={handleChangeTime}
+            control={control}
+          />
+          분
+        </TimeWrapper>
+      )}
     </LocalizationProvider>
   );
 });
@@ -157,6 +187,13 @@ const CustomDatePicker = styled(MuiDatePicker)<{
   .MuiTouchRipple-root {
     display: none;
   }
+`;
+
+const TimeWrapper = styled.div`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: 4px;
 `;
 
 const desktopPaper = styled(Paper)({

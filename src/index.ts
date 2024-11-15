@@ -16,4 +16,4 @@ export { default as Toggle } from "./components/toggle-switch";
 export { default as Pagination } from "./components/pagination";
 
 // hooks
-export { default as useClickOutSide } from "./hooks/use-click-outside";
+// export { default as useClickOutSide } from "./hooks/use-click-outside";

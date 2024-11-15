@@ -79,7 +79,7 @@ const sizeStyle: any = {
     height: "40px",
     padding: "0px 16px",
     fontSize: "14px",
-  },
+},
   large: {
     height: "44px",
     padding: "0px 18px",

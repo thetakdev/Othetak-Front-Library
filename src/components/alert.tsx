@@ -1,17 +1,21 @@
-"use client";
-import { Modal } from "@mui/material";
-import styled from "@emotion/styled";
-import Button from '@/components/button';
+'use client';
+import { COLORS } from '@/styles/common';
+import styled from '@emotion/styled';
+import React from 'react';
+import Modal from './modal';
+import Button from './button';
 
 interface Props {
   open: boolean;
-  title: string;
+  title: React.ReactNode | string;
   subTitle?: string;
   cancelText?: string;
   confirmText?: string;
   bottomContent?: React.ReactNode;
   hideBottomContent?: boolean;
   isLoading?: boolean;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
   onCancel?: () => void;
   onConfirm?: () => void;
 }
@@ -20,19 +24,27 @@ export default function Alert({
   open,
   title,
   subTitle,
-  cancelText = "닫기",
-  confirmText = "확인",
+  cancelText = '닫기',
+  confirmText = '확인',
   bottomContent,
   hideBottomContent = false,
   isLoading = false,
+  children,
+  style,
   onCancel,
   onConfirm,
 }: Props) {
   return (
-    <E_Modal open={open}>
+    <Modal open={open} onClose={onCancel} style={style}>
       <E_Container>
-        {title && <span className="title">{title}</span>}
-        {subTitle && <span className="subTitle">{subTitle}</span>}
+        {children ? (
+          children
+        ) : (
+          <>
+            {title && <span className="title">{title}</span>}
+            {subTitle && <span className="subTitle">{subTitle}</span>}
+          </>
+        )}
 
         {hideBottomContent === false && (
           <E_ButtonWrapper>
@@ -40,19 +52,11 @@ export default function Alert({
               bottomContent
             ) : (
               <>
-                <Button
-                  variant="secondary"
-                  onClick={onCancel}
-                  style={BUTTON_STYLE}
-                >
+                <Button variant="secondary" onClick={onCancel} style={BUTTON_STYLE}>
                   {cancelText}
                 </Button>
 
-                <Button
-                  isLoading={isLoading}
-                  onClick={onConfirm}
-                  style={BUTTON_STYLE}
-                >
+                <Button isLoading={isLoading} onClick={onConfirm} style={BUTTON_STYLE}>
                   {confirmText}
                 </Button>
               </>
@@ -60,13 +64,9 @@ export default function Alert({
           </E_ButtonWrapper>
         )}
       </E_Container>
-    </E_Modal>
+    </Modal>
   );
 }
-
-const E_Modal = styled(Modal)`
-  z-index: 9999;
-`;
 
 const E_Container = styled.div`
   position: absolute;
@@ -78,28 +78,27 @@ const E_Container = styled.div`
   align-items: center;
   min-width: 308px;
   padding: 32px 80px;
-  
+  background-color: ${COLORS.grayScale.white};
   border-radius: 16px;
-  box-shadow:
-    0px 4px 6px -2px rgba(16, 24, 40, 0.03),
-    0px 12px 18px -4px rgba(16, 24, 40, 0.08);
+  box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 18px -4px rgba(16, 24, 40, 0.08);
 
   &:focus {
     outline: none;
   }
 
   .title {
-    
+    color: ${COLORS.grayScale.black};
     font-size: 24px;
     font-weight: 700;
     line-height: normal;
     text-align: center;
-    white-space: pre-wrap;
+    white-space: nowrap;
+    margin-bottom: 0px;
   }
 
   .subTitle {
     margin-top: 20px;
-    
+    color: ${COLORS.grayScale.gray2};
     font-size: 16px;
     font-weight: 500;
     line-height: normal;
@@ -117,6 +116,6 @@ const E_ButtonWrapper = styled.div`
 `;
 
 const BUTTON_STYLE = {
-  width: "106px",
-  height: "36px",
+  width: '106px',
+  height: '36px',
 };

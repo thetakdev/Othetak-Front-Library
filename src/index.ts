@@ -1,7 +1,7 @@
 // components
 export { default as Accordion } from "./components/accordion";
 export { default as Alert } from "./components/alert";
-export { default as Button } from "./components/button";
+export { Button } from "./components/button";
 export { default as Checkbox } from "./components/checkbox";
 export { default as DateComponent } from "./components/date-component";
 export { default as DatePicker } from "./components/date-picker";
@@ -14,6 +14,8 @@ export { default as SearchDetail } from "./components/search-detail";
 export { default as Select } from "./components/select";
 export { default as Toggle } from "./components/toggle-switch";
 export { default as Pagination } from "./components/pagination";
+export { default as Email } from "./components/email";
+export { default as Error } from "./components/error";
 
 // hooks
 // export { default as useClickOutSide } from "./hooks/use-click-outside";

@@ -1,7 +1,7 @@
 "use client";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import Button from "@/components/button";
+import {Button} from "@/components/button";
 import { useRef } from "react";
 import Input from "@/components/input";
 import { useTheme } from "@emotion/react";

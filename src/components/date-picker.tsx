@@ -10,7 +10,6 @@ import { Paper } from "@mui/material";
 import Image from "next/image";
 import Checkbox from "./checkbox";
 import styled from "@emotion/styled";
-import { HOURS, MINUTES } from "@/lib/static/common";
 import { useForm } from "react-hook-form";
 import Select from "./select";
 interface Props {
@@ -24,6 +23,16 @@ interface Props {
   style?: any;
   time?: boolean;
 }
+
+export const HOURS = Array.from({ length: 25 }, (_, i) => ({
+  label: `${String(i).padStart(2, "0")}시`,
+  value: String(i).padStart(2, "0"),
+}));
+
+export const MINUTES = Array.from({ length: 60 }, (_, i) => ({
+  label: `${String(i).padStart(2, "0")}분`,
+  value: String(i).padStart(2, "0"),
+}));
 
 const initialTime = {
   hours: "00",

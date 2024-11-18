@@ -5,7 +5,7 @@ import { Collapse, Grid } from "@mui/material";
 import Select, { SELECT_PROPS } from "./select";
 import Input, { INPUT_PROPS } from "./input";
 import { useTheme } from "@emotion/react";
-import Button from "./button";
+import { Button } from "./button";
 
 interface Props {
   children?: React.ReactNode;

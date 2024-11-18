@@ -20,7 +20,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLElement> {
   size?: SizeType;
 }
 
-const Button = ({
+export const Button = ({
   className,
   variant = "primary",
   size = "middle",
@@ -61,8 +61,6 @@ const Button = ({
     </CustomButton>
   );
 };
-
-export default Button;
 
 const sizeStyle: any = {
   tiny: {

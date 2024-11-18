@@ -1,9 +1,9 @@
-'use client';
-import { COLORS } from '@/styles/common';
-import styled from '@emotion/styled';
-import React from 'react';
-import Modal from './modal';
-import Button from './button';
+"use client";
+import { COLORS } from "@/styles/common";
+import styled from "@emotion/styled";
+import React from "react";
+import Modal from "./modal";
+import { Button } from "./button";
 
 interface Props {
   open: boolean;
@@ -24,8 +24,8 @@ export default function Alert({
   open,
   title,
   subTitle,
-  cancelText = '닫기',
-  confirmText = '확인',
+  cancelText = "닫기",
+  confirmText = "확인",
   bottomContent,
   hideBottomContent = false,
   isLoading = false,
@@ -52,11 +52,19 @@ export default function Alert({
               bottomContent
             ) : (
               <>
-                <Button variant="secondary" onClick={onCancel} style={BUTTON_STYLE}>
+                <Button
+                  variant="secondary"
+                  onClick={onCancel}
+                  style={BUTTON_STYLE}
+                >
                   {cancelText}
                 </Button>
 
-                <Button isLoading={isLoading} onClick={onConfirm} style={BUTTON_STYLE}>
+                <Button
+                  isLoading={isLoading}
+                  onClick={onConfirm}
+                  style={BUTTON_STYLE}
+                >
                   {confirmText}
                 </Button>
               </>
@@ -80,7 +88,9 @@ const E_Container = styled.div`
   padding: 32px 80px;
   background-color: ${COLORS.grayScale.white};
   border-radius: 16px;
-  box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 18px -4px rgba(16, 24, 40, 0.08);
+  box-shadow:
+    0px 4px 6px -2px rgba(16, 24, 40, 0.03),
+    0px 12px 18px -4px rgba(16, 24, 40, 0.08);
 
   &:focus {
     outline: none;
@@ -116,6 +126,6 @@ const E_ButtonWrapper = styled.div`
 `;
 
 const BUTTON_STYLE = {
-  width: '106px',
-  height: '36px',
+  width: "106px",
+  height: "36px",
 };

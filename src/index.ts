@@ -16,6 +16,14 @@ export { default as Toggle } from "./components/toggle-switch";
 export { default as Pagination } from "./components/pagination";
 export { default as Email } from "./components/email";
 export { default as Error } from "./components/error";
+export { default as ListTable } from "./components/list-table";
+export { default as Table } from "./components/table";
+export { default as ToastAlert } from "./components/toast-alert";
+export { Tooltip } from "./components/tooltip";
+export { TooltipBlack } from "./components/tooltip";
+export { default as TrashButton } from "./components/trash";
+export { default as ErrorMessage } from "./components/errors";
 
 // hooks
-// export { default as useClickOutSide } from "./hooks/use-click-outside";
+export { default as useClickOutSide } from "./hooks/use-click-outside";
+export { default as useSearchSession } from "./hooks/use-search-session";

@@ -54,3 +54,7 @@ export const CHECKBOX = {
       "https://image.thetak.net/asset/product/images/checkbox_radio_admin.svg",
   },
 };
+
+export const IMAGE = {
+  trash: "https://image.thetak.net/asset/product/images/trash_admin_main.svg",
+};

@@ -1,6 +1,6 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
-import { CHECKBOX, COLORS } from './common';
+import { CHECKBOX, COLORS, IMAGE } from './common';
 
 const muiTheme = createTheme({
   palette: {
@@ -37,5 +37,7 @@ const muiTheme = createTheme({
 export const theme: any = {
   ...muiTheme,
   colors: COLORS,
-  checkbox: CHECKBOX
+  checkbox: CHECKBOX,
+  image: IMAGE,
+
 }

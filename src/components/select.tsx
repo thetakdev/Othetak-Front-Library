@@ -102,6 +102,7 @@ function Select({
     el: SelectOptionType,
     _onChange: (rest: any) => any
   ) => {
+    onChange && onChange();
     if (multiSelect) {
       if (el.value === null) {
         if (selectedOptions.length === option.length) {
@@ -126,7 +127,6 @@ function Select({
       _onChange(el.value);
       setVisible(false);
     }
-    onChange && onChange();
   };
 
   // 검색
@@ -279,7 +279,9 @@ function Select({
                 <CircularProgress size={14} />
               ) : (
                 <Image
-                  src={`https://image.thetak.net/asset/product/images/${disabled ? "arrow_down_gray_25" : "arrow_down_gray_2"}.svg`}
+                  src={`https://image.thetak.net/asset/product/images/${
+                    disabled ? "arrow_down_gray_25" : "arrow_down_gray_2"
+                  }.svg`}
                   alt="arrow"
                   width={imgSize}
                   height={imgSize}
@@ -311,7 +313,9 @@ function Select({
 
                 return (
                   <div
-                    className={`option ${isSelected ? "selected" : ""} ${index === focusedIndex ? "focused" : ""}`}
+                    className={`option ${isSelected ? "selected" : ""} ${
+                      index === focusedIndex ? "focused" : ""
+                    }`}
                     key={index}
                     onClick={(e) => {
                       handleOptionClick(el, onChange);
@@ -495,17 +499,23 @@ const selectType = {
 const STATUS_STYLE = (theme: any, visible: boolean) => ({
   normal: {
     backgroundColor: theme.colors.grayScale.white,
-    border: `1px solid ${visible ? theme.colors.mainColor.main : theme.colors.grayScale.gray3}`,
+    border: `1px solid ${
+      visible ? theme.colors.mainColor.main : theme.colors.grayScale.gray3
+    }`,
     color: theme.colors.grayScale.black,
   },
   error: {
     backgroundColor: theme.colors.errorColor.error3,
-    border: `1px solid ${visible ? theme.colors.mainColor.main : theme.colors.errorColor.errorMain}`,
+    border: `1px solid ${
+      visible ? theme.colors.mainColor.main : theme.colors.errorColor.errorMain
+    }`,
     color: theme.colors.grayScale.black,
   },
   disabled: {
     backgroundColor: theme.colors.grayScale.gray4,
-    border: `1px solid ${visible ? theme.colors.mainColor.main : theme.colors.grayScale.gray3}`,
+    border: `1px solid ${
+      visible ? theme.colors.mainColor.main : theme.colors.grayScale.gray3
+    }`,
     color: theme.colors.grayScale.gray3,
   },
 });

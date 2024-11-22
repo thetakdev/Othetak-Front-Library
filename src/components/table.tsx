@@ -1,11 +1,14 @@
-'use client';
+"use client";
 
-
-import styled from '@emotion/styled';
-import React from 'react';
-import { COLORS } from '@/styles/common';
-import Image from 'next/image';
-import { MaterialReactTable, MRT_RowData, useMaterialReactTable } from 'material-react-table';
+import styled from "@emotion/styled";
+import { COLORS } from "@/styles/common";
+import Image from "next/image";
+import {
+  MaterialReactTable,
+  MRT_RowData,
+  useMaterialReactTable,
+} from "material-react-table";
+import { useTheme } from "@emotion/react";
 
 export type RowClickType<T> = {
   id: string;
@@ -64,6 +67,7 @@ const Table = <T extends MRT_RowData[]>({
   muiTableContainerProps,
   ...rest
 }: TableProps<T>) => {
+  const theme = useTheme();
   const table = useMaterialReactTable({
     columns,
     data,
@@ -85,9 +89,9 @@ const Table = <T extends MRT_RowData[]>({
     },
 
     displayColumnDefOptions: {
-      'mrt-row-drag': {
+      "mrt-row-drag": {
         size: 50,
-        header: '',
+        header: "",
       },
     },
     getRowId: (row) => row.id,
@@ -95,14 +99,19 @@ const Table = <T extends MRT_RowData[]>({
       onDragEnd: () => {
         const { draggingRow, hoveredRow } = table.getState();
         if (hoveredRow && draggingRow) {
-          data.splice(hoveredRow.index as number, 0, data.splice(draggingRow.index, 1)[0]);
+          data.splice(
+            hoveredRow.index as number,
+            0,
+            data.splice(draggingRow.index, 1)[0]
+          );
           setData && setData([...data] as T);
         }
       },
     }),
 
     renderEmptyRowsFallback() {
-      const height = muiTableContainerProps?.height || muiTableContainerProps?.sx.maxHeight;
+      const height =
+        muiTableContainerProps?.height || muiTableContainerProps?.sx.maxHeight;
 
       return (
         <EmptyRenderContainer style={{ height: `calc(${height} - 52px)` }}>
@@ -115,7 +124,7 @@ const Table = <T extends MRT_RowData[]>({
           ) : (
             <div className="empty-image-wrapper">
               <Image
-                src="https://image.thetak.net/asset/product/images/emotion_empty_data_sad_main.svg"
+                src={theme.table.emptyImage}
                 width={173}
                 height={151}
                 alt="search"
@@ -138,57 +147,60 @@ const Table = <T extends MRT_RowData[]>({
 
     muiTableProps: {
       sx: {
-        '.MuiTableRow-root': { boxShadow: 'none' },
-        '.MuiTableCell-root': { padding: '0' },
+        ".MuiTableRow-root": { boxShadow: "none" },
+        ".MuiTableCell-root": { padding: "0" },
       },
     },
     muiTableHeadProps: {
       sx: {
-        '.Mui-TableHeadCell-Content-Labels': {
-          width: '100%',
+        ".Mui-TableHeadCell-Content-Labels": {
+          width: "100%",
         },
-        '.Mui-TableHeadCell-Content-Wrapper': {
-          width: '100%',
+        ".Mui-TableHeadCell-Content-Wrapper": {
+          width: "100%",
         },
 
-        position: 'sticky',
+        position: "sticky",
         top: stickyHeight,
-        zIndex: '2',
-        opacity: '1',
+        zIndex: "2",
+        opacity: "1",
         height: 40,
         ...muiTableHeadProps,
       },
     },
     muiTableHeadCellProps: {
-      align: 'center',
+      align: "center",
       sx: {
-        backgroundColor: COLORS.mainColor.main1,
+        backgroundColor: theme.table.backgroundColor,
         padding: 0,
         paddingBottom: 0,
-        verticalAlign: 'center',
+        verticalAlign: "center",
         paddingTop: 0,
-        align: 'center',
-        borderBottom: `1px solid ${COLORS.mainColor.main3}`,
-        color: '#101828',
+        align: "center",
+        borderBottom: theme.table.borderBottom,
+        color: "#101828",
         fontWeight: 700,
-        ':last-child': { borderRight: 'none' },
+        ":last-child": { borderRight: "none" },
         ...muiTableHeadCellProps,
       },
     },
     muiTableBodyCellProps: (args) => {
       const style = {
-        backgroundColor: '',
-        borderTop: '',
+        backgroundColor: "",
+        borderTop: "",
         input: {
-          color: '',
+          color: "",
         },
       };
-      if (args.row.original?.verifyResult === 2 || args.row.original?.verifyResult === 1) {
-        style['backgroundColor'] = '#FEF0C7 !important';
-        style['borderTop'] = '#F79009 !important';
+      if (
+        args.row.original?.verifyResult === 2 ||
+        args.row.original?.verifyResult === 1
+      ) {
+        style["backgroundColor"] = "#FEF0C7 !important";
+        style["borderTop"] = "#F79009 !important";
       }
       return {
-        align: 'center',
+        align: "center",
         onClick: () => {
           onRowClick &&
             onRowClick?.({
@@ -200,12 +212,12 @@ const Table = <T extends MRT_RowData[]>({
           minHeight: 40,
           borderTop: `1px solid #F3F5F6`,
           borderRight: `1px solid #F3F5F6`,
-          padding: '4px 0px',
-          alignItems: 'center',
-          color: '#1D1B20',
-          fontSize: '14px',
-          fontWeight: '400',
-          ':last-child': { borderRight: 'none' },
+          padding: "4px 0px",
+          alignItems: "center",
+          color: "#1D1B20",
+          fontSize: "14px",
+          fontWeight: "400",
+          ":last-child": { borderRight: "none" },
 
           ...style,
           ...muiTableBodyCellProps,
@@ -216,11 +228,11 @@ const Table = <T extends MRT_RowData[]>({
     muiTableBodyProps: (args) => {
       return {
         sx: {
-          'tr:hover': {
-            cursor: isPointer ? 'pointer !important' : 'auto',
+          "tr:hover": {
+            cursor: isPointer ? "pointer !important" : "auto",
             td: {
-              backgroundColor: COLORS.mainColor.main1,
-              borderColor: '#ffffff',
+              backgroundColor: theme.table.backgroundColor,
+              borderColor: "#ffffff",
             },
           },
 
@@ -229,14 +241,18 @@ const Table = <T extends MRT_RowData[]>({
       };
     },
     muiTablePaperProps: muiTablePaperProps || {
-      sx: { border: `1px solid #F3F5F6`, borderRadius: '0px', boxShadow: 'none' },
+      sx: {
+        border: `1px solid #F3F5F6`,
+        borderRadius: "0px",
+        boxShadow: "none",
+      },
     },
-    layoutMode: 'semantic',
+    layoutMode: "semantic",
     enableRowVirtualization: enableRowVirtualization,
     enableColumnVirtualization: enableColumnVirtualization,
     rowVirtualizerOptions: rowVirtualizerOptions, //optionally customize the row virtualizer
     columnVirtualizerOptions: columnVirtualizerOptions, //optionally customize the column virtualizer
-    editDisplayMode: 'table',
+    editDisplayMode: "table",
     ...rest,
     // enableEditing: true,
   });
@@ -282,7 +298,7 @@ const LoadingBar = styled.div`
   display: block;
   margin: 15px auto;
   position: relative;
-  color: #572a9b;
+  color: ${({ theme }) => theme.table.backgroundColor};
   box-sizing: border-box;
   animation: animloader 2s linear infinite;
 
@@ -325,24 +341,57 @@ export function HeaderSorting({
     if (fieldSortState?.ascYn === undefined) {
       onSorting(2, field);
     }
-    if (field === fieldSortState?.columnName && fieldSortState?.ascYn === true) {
+    if (
+      field === fieldSortState?.columnName &&
+      fieldSortState?.ascYn === true
+    ) {
       onSorting(3, field);
     }
-    if (field === fieldSortState?.columnName && fieldSortState?.ascYn === false) {
+    if (
+      field === fieldSortState?.columnName &&
+      fieldSortState?.ascYn === false
+    ) {
       onSorting(1, field);
     }
   };
 
   return (
-    <div onClick={handleClickSort} style={{ display: 'flex', gap: 4, justifyContent: 'center', alignItems: 'center' }}>
+    <div
+      onClick={handleClickSort}
+      style={{
+        display: "flex",
+        gap: 4,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {children}
-      {fieldSortState?.ascYn === undefined && <Image src={'/images/icon/sort/sort_default.svg'} alt="default" width={13} height={13} />}
-      {field === fieldSortState?.columnName && fieldSortState?.ascYn === true && (
-        <Image src={'/images/icon/sort/sort_up.svg'} alt="up" width={13} height={13} />
+      {fieldSortState?.ascYn === undefined && (
+        <Image
+          src={"/images/icon/sort/sort_default.svg"}
+          alt="default"
+          width={13}
+          height={13}
+        />
       )}
-      {field === fieldSortState?.columnName && fieldSortState?.ascYn === false && (
-        <Image src={'/images/icon/sort/sort_down.svg'} alt="down" width={13} height={13} />
-      )}
+      {field === fieldSortState?.columnName &&
+        fieldSortState?.ascYn === true && (
+          <Image
+            src={"/images/icon/sort/sort_up.svg"}
+            alt="up"
+            width={13}
+            height={13}
+          />
+        )}
+      {field === fieldSortState?.columnName &&
+        fieldSortState?.ascYn === false && (
+          <Image
+            src={"/images/icon/sort/sort_down.svg"}
+            alt="down"
+            width={13}
+            height={13}
+          />
+        )}
     </div>
   );
 }

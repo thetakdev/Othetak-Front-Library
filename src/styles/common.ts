@@ -58,3 +58,10 @@ export const CHECKBOX = {
 export const IMAGE = {
   trash: "https://image.thetak.net/asset/product/images/trash_admin_main.svg",
 };
+
+export const TABLE = {
+  backgroundColor: COLORS.mainColor.main1,
+  borderBottom: `1px solid ${COLORS.mainColor.main3}`,
+  emptyImage:
+    "https://image.thetak.net/asset/product/images/emotion_empty_data_sad_brand.svg",
+};

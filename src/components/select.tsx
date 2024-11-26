@@ -32,7 +32,7 @@ export interface SELECT_PROPS {
   multiSelect?: boolean;
   allCheck?: boolean;
   placeholder?: string;
-  onChange?: () => void;
+  onChange?: (data: any) => void;
   isLoading?: boolean;
   labelComponent?: any;
 }
@@ -102,7 +102,6 @@ function Select({
     el: SelectOptionType,
     _onChange: (rest: any) => any
   ) => {
-    onChange && onChange();
     if (multiSelect) {
       if (el.value === null) {
         if (selectedOptions.length === option.length) {
@@ -125,6 +124,7 @@ function Select({
     } else {
       setSelectedOptions([el]);
       _onChange(el.value);
+      onChange && onChange(el.value);
       setVisible(false);
     }
   };

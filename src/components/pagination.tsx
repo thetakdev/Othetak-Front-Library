@@ -23,39 +23,11 @@ export interface PAGINATION_PROPS {
   isLoading: boolean;
 }
 
-function PaginationComp({ pageData, onChange, isLoading }: PAGINATION_PROPS) {
-  const [myPage, setMyPage] = useState("");
-
+function PaginationComp({ pageData, onChange }: PAGINATION_PROPS) {
   const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     onChange(value);
-  };
-
-  const handleChangePage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let { value } = event.target;
-    if (value == "0") return;
-    value = value.replace(/[^0-9]/g, "");
-    if (Number(value) < pageData.pageCount) {
-      setMyPage(value);
-    } else if (Number(value) === 0) {
-      setMyPage("");
-    } else {
-      setMyPage(pageData.pageCount.toString());
-    }
-  };
-
-  const handleSubmitPage = () => {
-    onChange(Number(myPage));
-  };
-
-  const handleKeyDownEnter = (
-    e: React.KeyboardEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLElement
-    >,
-    callback: (callback?: (...rest: any) => any) => any
-  ) => {
-    if (e.key === "Enter") callback();
   };
 
   return (
@@ -121,39 +93,6 @@ function PaginationComp({ pageData, onChange, isLoading }: PAGINATION_PROPS) {
               />
             )}
           />
-          <Box
-            sx={{
-              width: 109,
-              height: 28,
-              display: "flex",
-              border: `1px solid ${theme.colors.grayScale.gray3}`,
-              borderRadius: "6px",
-              pl: "6px",
-            }}
-          >
-            <Input
-              disableUnderline={true}
-              placeholder="이동할 페이지"
-              value={myPage}
-              onChange={handleChangePage}
-              onKeyDown={(e) => handleKeyDownEnter(e, handleSubmitPage)}
-              inputProps={{ maxLength: 7 }}
-              sx={{ fontSize: 12, pt: "1px" }}
-            />
-            <IconButton
-              size="small"
-              sx={{ p: 0 }}
-              disabled={isLoading}
-              onClick={handleSubmitPage}
-            >
-              <Image
-                src={`/images/icon/${isLoading ? "gray" : "darkgray"}/arrow_right.svg`}
-                width={24}
-                height={24}
-                alt="nextButton"
-              />
-            </IconButton>
-          </Box>
         </>
       )}
     </Box>

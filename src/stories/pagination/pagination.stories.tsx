@@ -16,8 +16,8 @@ export const PrimaryToggle: Story = {
     const [pagination, setPagination] = useState({
       page: 1,
       perPage: 50,
-      totalCount: 10,
-      pageCount: 1,
+      totalCount: 1000,
+      pageCount: 8,
     });
 
     const handleChangePagination = (e: number) => {
@@ -28,11 +28,19 @@ export const PrimaryToggle: Story = {
     };
 
     return (
-      <Pagination
-        pageData={pagination}
-        onChange={handleChangePagination}
-        isLoading={false}
-      />
+      <>
+        <Pagination
+          pageData={pagination}
+          onChange={handleChangePagination}
+          isLoading={false}
+        />
+        <Pagination
+          size="small"
+          pageData={pagination}
+          onChange={handleChangePagination}
+          isLoading={false}
+        />
+      </>
     );
   },
 };

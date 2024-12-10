@@ -1,13 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import {
-  Box,
-  IconButton,
-  Input,
-  Pagination,
-  PaginationItem,
-  Stack,
-} from "@mui/material";
+import { Box, Pagination, PaginationItem, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
 export type PAGINATION_TYPE = {
@@ -21,9 +14,14 @@ export interface PAGINATION_PROPS {
   pageData: PAGINATION_TYPE;
   onChange: (page: number) => void;
   isLoading: boolean;
+  size?: "small" | "large";
 }
 
-function PaginationComp({ pageData, onChange }: PAGINATION_PROPS) {
+function PaginationComp({
+  pageData,
+  onChange,
+  size = "large",
+}: PAGINATION_PROPS) {
   const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -34,10 +32,10 @@ function PaginationComp({ pageData, onChange }: PAGINATION_PROPS) {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: size === "small" ? "end" : "center",
         alignItems: "center",
-        height: 40,
-        mt: "20px",
+        height: size === "small" ? 20 : 40,
+        mt: size === "small" ? "5px" : "20px",
       }}
     >
       {pageData && pageData.totalCount > pageData.perPage && (
@@ -46,7 +44,7 @@ function PaginationComp({ pageData, onChange }: PAGINATION_PROPS) {
             page={pageData.page}
             count={pageData.pageCount}
             shape="rounded"
-            size="large"
+            size={size}
             color="secondary"
             onChange={handleChange}
             sx={{
@@ -70,7 +68,7 @@ function PaginationComp({ pageData, onChange }: PAGINATION_PROPS) {
                         height={20}
                         alt="prevButton"
                       />
-                      <Box>이전 페이지</Box>
+                      {size !== "small" && <Box>이전 페이지</Box>}
                     </Stack>
                   ),
                   next: () => (
@@ -79,7 +77,7 @@ function PaginationComp({ pageData, onChange }: PAGINATION_PROPS) {
                       justifyContent="center"
                       sx={{ gap: "8px", fontWeight: 500 }}
                     >
-                      <Box>다음 페이지</Box>
+                      {size !== "small" && <Box>다음 페이지</Box>}
                       <Image
                         src={`/images/icon/black/arrow_right.svg`}
                         width={20}

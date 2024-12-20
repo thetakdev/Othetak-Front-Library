@@ -15,7 +15,7 @@ interface Props {
   closeStyle?: React.CSSProperties;
   children: React.ReactNode;
   title?: string;
-  modalOption: OverridableComponent<ModalTypeMap<"div", {}>>;
+  modalOption?: OverridableComponent<ModalTypeMap<"div", {}>>;
 }
 
 export default function Modal({

@@ -1,8 +1,9 @@
-'use client';
-import { Modal as CustomModal } from '@mui/material';
-import Image from 'next/image';
-import { COLORS } from '@/styles/common';
-import styled from '@emotion/styled';
+"use client";
+import { Modal as CustomModal, ModalTypeMap } from "@mui/material";
+import Image from "next/image";
+import { COLORS } from "@/styles/common";
+import styled from "@emotion/styled";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
 
 interface Props {
   open: boolean;
@@ -14,6 +15,7 @@ interface Props {
   closeStyle?: React.CSSProperties;
   children: React.ReactNode;
   title?: string;
+  modalOption: OverridableComponent<ModalTypeMap<"div", {}>>;
 }
 
 export default function Modal({
@@ -26,15 +28,23 @@ export default function Modal({
   closeStyle,
   children,
   title,
+  modalOption,
 }: Props) {
   return (
-    <CustomModal open={open} onClose={onClose} hideBackdrop={hideBackdrop}>
+    <CustomModal
+      open={open}
+      onClose={onClose}
+      hideBackdrop={hideBackdrop}
+      {...modalOption}
+    >
       <EContainer style={style}>
         {title && <h3 className="title">{title}</h3>}
         {isClose && (
           <Image
             className="close"
-            src={'https://image.thetak.net/asset/product/images/x_close_gray_2.svg'}
+            src={
+              "https://image.thetak.net/asset/product/images/x_close_gray_2.svg"
+            }
             alt="close"
             width={closeSize}
             height={closeSize}
@@ -50,7 +60,7 @@ export default function Modal({
 
 const EContainer = styled.div<{ style?: React.CSSProperties }>`
   position: absolute;
-  top: ${({ style }) => (style?.top ? style.top : '50%')};
+  top: ${({ style }) => (style?.top ? style.top : "50%")};
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 30px;

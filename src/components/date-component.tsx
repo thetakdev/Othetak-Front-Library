@@ -1,10 +1,10 @@
-'use client';
-import { Box, styled, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { Controller } from 'react-hook-form';
-import dayjs from 'dayjs';
-import CustomDatePicker from '@/components/date-picker';
-import { COLORS } from '@/styles/common';
-import { Dispatch, SetStateAction } from 'react';
+"use client";
+import { Box, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Controller } from "react-hook-form";
+import dayjs from "dayjs";
+import CustomDatePicker from "@/components/date-picker";
+import { COLORS } from "@/styles/common";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   control: any;
@@ -13,55 +13,78 @@ interface Props {
   watch: (...rest: any) => any;
   alignment: string;
   setAlignment: Dispatch<SetStateAction<string>>;
+  startDateName?: string;
+  endDateName?: string;
 }
 
-function DateComponent({ control, setValue, getValues, watch, alignment, setAlignment }: Props) {
+function DateComponent({
+  control,
+  setValue,
+  getValues,
+  watch,
+  alignment,
+  setAlignment,
+  startDateName = "startDate",
+  endDateName = "endDate",
+}: Props) {
   const handleChangeDate = (date: Date | boolean, name: any) => {
     setValue(name, date);
   };
 
   // 날짜 토글 버튼 선택
-  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
-      setValue('startDate', dayjs().subtract(Number(newAlignment), 'day').toDate());
-      setValue('endDate', new Date());
-      if (newAlignment === '-1') {
-        setValue('endDate', null);
-        setValue('startDate', null);
+      setValue(
+        startDateName,
+        dayjs().subtract(Number(newAlignment), "day").toDate()
+      );
+      setValue(endDateName, new Date());
+      if (newAlignment === "-1") {
+        setValue(endDateName, null);
+        setValue(startDateName, null);
       }
     }
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       <Controller
-        name="startDate"
+        name={startDateName}
         control={control}
         render={({ field }) => (
           <CustomDatePicker
             {...field}
-            value={watch('startDate') ? new Date(getValues('startDate')) : null}
-            maxDate={watch('endDate') ? new Date(getValues('endDate')) : new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
+            value={
+              watch(startDateName) ? new Date(getValues(startDateName)) : null
+            }
+            maxDate={
+              watch(endDateName)
+                ? new Date(getValues(endDateName))
+                : new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+            }
             onChange={handleChangeDate}
           />
         )}
       />
-      <Box sx={{ mx: '3px' }}>~</Box>
+      <Box sx={{ mx: "3px" }}>~</Box>
       <Controller
-        name="endDate"
+        name={endDateName}
         control={control}
         render={({ field }) => (
           <CustomDatePicker
             {...field}
-            value={watch('endDate') ? new Date(getValues('endDate')) : null}
-            minDate={watch('startDate') && new Date(getValues('startDate'))}
+            value={watch(endDateName) ? new Date(getValues(endDateName)) : null}
+            minDate={watch(startDateName) && new Date(getValues(startDateName))}
             onChange={handleChangeDate}
           />
         )}
       />
       <StyledToggleButtonGroup
-        sx={{ ml: '8px', gap: '4px' }}
+        sx={{ ml: "8px", gap: "4px" }}
         value={alignment}
         size="small"
         exclusive
@@ -89,33 +112,33 @@ function DateComponent({ control, setValue, getValues, watch, alignment, setAlig
 }
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(() => ({
-  '.MuiToggleButton-root': {
+  ".MuiToggleButton-root": {
     color: COLORS.mainColor.main,
   },
-  '.MuiButtonBase-root.Mui-selected': {
-    color: '#FFFFFF',
+  ".MuiButtonBase-root.Mui-selected": {
+    color: "#FFFFFF",
     backgroundColor: COLORS.mainColor.main,
-    '&:hover': {
+    "&:hover": {
       backgroundColor: COLORS.mainColor.main,
     },
   },
-  '.MuiToggleButtonGroup-grouped': {
-    height: '28px',
-    minWidth: '39px',
-    borderRadius: '8px',
+  ".MuiToggleButtonGroup-grouped": {
+    height: "28px",
+    minWidth: "39px",
+    borderRadius: "8px",
     border: `1px solid ${COLORS.mainColor.main}`,
 
-    '&:not(:first-of-type)': {
-      borderRadius: '8px',
+    "&:not(:first-of-type)": {
+      borderRadius: "8px",
       border: `1px solid ${COLORS.mainColor.main}`,
     },
-    '&:not(:last-of-type)': {
-      borderRadius: '8px',
+    "&:not(:last-of-type)": {
+      borderRadius: "8px",
     },
-    '&:first-of-type': {
-      borderRadius: '8px',
+    "&:first-of-type": {
+      borderRadius: "8px",
     },
   },
 }));
 
-export default DateComponent
+export default DateComponent;

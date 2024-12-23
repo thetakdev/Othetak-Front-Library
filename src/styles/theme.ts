@@ -1,6 +1,6 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
-import { CHECKBOX, COLORS, IMAGE, TABLE } from "./common";
+import { CHECKBOX, COLORS, DATE_PICKER, IMAGE, TABLE } from "./common";
 
 const muiTheme = createTheme({
   palette: {
@@ -39,4 +39,5 @@ export const theme: any = {
   checkbox: CHECKBOX,
   image: IMAGE,
   table: TABLE,
+  datepicker: DATE_PICKER,
 };

@@ -12,6 +12,7 @@ import Checkbox from "./checkbox";
 import styled from "@emotion/styled";
 import { useForm } from "react-hook-form";
 import Select from "./select";
+import { useTheme } from "@emotion/react";
 interface Props {
   name: string;
   value: Date;
@@ -52,6 +53,7 @@ export default forwardRef(function DatePicker(
   }: Props,
   ref: any
 ) {
+  const theme = useTheme();
   const [visible, setVisible] = useState(false);
   const { control, getValues, setValue } = useForm({
     defaultValues: initialTime,
@@ -110,8 +112,8 @@ export default forwardRef(function DatePicker(
                 disabled
                   ? "/images/calender/calender_disabled.svg"
                   : visible
-                    ? "/images/calender/calender_admin_main.svg"
-                    : "/images/calender/calender_admin3.svg"
+                  ? theme.datepicker.open
+                  : theme.datepicker.close
               }
               width={16}
               height={16}
@@ -352,7 +354,7 @@ const layout = styled(PickersLayout)(
         backgroundColor: `${theme.colors.mainColor.main2}`,
         borderRadius: "6px",
       },
-    }) as any
+    } as any)
 ) as any;
 
 const rightArrowIcon = styled.div`

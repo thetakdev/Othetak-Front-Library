@@ -23,6 +23,7 @@ export { Tooltip } from "./components/tooltip";
 export { TooltipBlack } from "./components/tooltip";
 export { default as TrashButton } from "./components/trash";
 export { default as ErrorMessage } from "./components/errors";
+export { default as TextArea } from "./components/text-area";
 
 // hooks
 export { default as useClickOutSide } from "./hooks/use-click-outside";

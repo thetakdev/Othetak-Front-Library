@@ -3,8 +3,8 @@ import { Box, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { Controller } from "react-hook-form";
 import dayjs from "dayjs";
 import CustomDatePicker from "@/components/date-picker";
-import { COLORS } from "@/styles/common";
 import { Dispatch, SetStateAction } from "react";
+import { useTheme } from "@emotion/react";
 
 interface Props {
   control: any;
@@ -111,34 +111,37 @@ function DateComponent({
   );
 }
 
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(() => ({
-  ".MuiToggleButton-root": {
-    color: COLORS.mainColor.main,
-  },
-  ".MuiButtonBase-root.Mui-selected": {
-    color: "#FFFFFF",
-    backgroundColor: COLORS.mainColor.main,
-    "&:hover": {
-      backgroundColor: COLORS.mainColor.main,
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)((props) => {
+  const theme = useTheme();
+  return {
+    ".MuiToggleButton-root": {
+      color: theme.colors.mainColor.main,
     },
-  },
-  ".MuiToggleButtonGroup-grouped": {
-    height: "28px",
-    minWidth: "39px",
-    borderRadius: "8px",
-    border: `1px solid ${COLORS.mainColor.main}`,
+    ".MuiButtonBase-root.Mui-selected": {
+      color: "#FFFFFF",
+      backgroundColor: theme.colors.mainColor.main,
+      "&:hover": {
+        backgroundColor: theme.colors.mainColor.main,
+      },
+    },
+    ".MuiToggleButtonGroup-grouped": {
+      height: "28px",
+      minWidth: "39px",
+      borderRadius: "8px",
+      border: `1px solid ${theme.colors.mainColor.main}`,
 
-    "&:not(:first-of-type)": {
-      borderRadius: "8px",
-      border: `1px solid ${COLORS.mainColor.main}`,
+      "&:not(:first-of-type)": {
+        borderRadius: "8px",
+        border: `1px solid ${theme.colors.mainColor.main}`,
+      },
+      "&:not(:last-of-type)": {
+        borderRadius: "8px",
+      },
+      "&:first-of-type": {
+        borderRadius: "8px",
+      },
     },
-    "&:not(:last-of-type)": {
-      borderRadius: "8px",
-    },
-    "&:first-of-type": {
-      borderRadius: "8px",
-    },
-  },
-}));
+  };
+});
 
 export default DateComponent;

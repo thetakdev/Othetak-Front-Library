@@ -65,3 +65,8 @@ export const TABLE = {
   emptyImage:
     "https://image.thetak.net/asset/product/images/emotion_empty_data_sad_brand.svg",
 };
+
+export const DATE_PICKER = {
+  open: "https://image.thetak.net/asset/product/images/calender_admin_main.svg",
+  close: "https://image.thetak.net/asset/product/images/calender_admin_3.svg",
+};

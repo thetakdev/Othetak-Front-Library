@@ -28,6 +28,20 @@ const useSearchSession = (initialParams: Record<string, any>) => {
     }
   };
 
+  const resetPageSession = (pageKey: string) => {
+    try {
+      const queriesJSON = sessionStorage.getItem("queries");
+      if (queriesJSON) {
+        const queries = JSON.parse(queriesJSON);
+        delete queries[pageKey];
+        const updatedQueriesJSON = JSON.stringify(queries);
+        sessionStorage.setItem("queries", updatedQueriesJSON);
+      }
+    } catch (e) {
+      console.log("e", e);
+    }
+  };
+
   const updateQuery = useCallback(
     (newQuery: Record<string, any>) => {
       setQuery(newQuery);
@@ -41,7 +55,7 @@ const useSearchSession = (initialParams: Record<string, any>) => {
     saveQueryToSessionStorage(initialParams);
   }, [initialParams, pathname, router]);
 
-  return { query, updateQuery, resetQueryToInitial };
+  return { query, updateQuery, resetQueryToInitial, resetPageSession };
 };
 
 export default useSearchSession;

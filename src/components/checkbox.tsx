@@ -62,6 +62,7 @@ export const Checkbox = forwardRef(
         >
           <input
             type="checkbox"
+            disabled={disabled}
             checked={checked}
             onChange={onChange ? onChange : () => {}}
           />

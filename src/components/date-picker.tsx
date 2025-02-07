@@ -110,7 +110,7 @@ export default forwardRef(function DatePicker(
             <Image
               src={
                 disabled
-                  ? "/images/calender/calender_disabled.svg"
+                  ? "https://image.thetak.net/asset/product/images/calender_disabled.svg"
                   : visible
                   ? theme.datepicker.open
                   : theme.datepicker.close

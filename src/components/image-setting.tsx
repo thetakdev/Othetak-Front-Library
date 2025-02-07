@@ -69,7 +69,7 @@ const ImageSetting = ({
             <br />
             • 노출 사이즈: 500px*500px
             <br />
-            • 업로드 가능 형식: jpg, jpeg, gif, png, bmp
+            • 업로드 가능 형식: jpg, jpeg, png, bmp
             <br />
           </div>
           <Input
@@ -104,7 +104,7 @@ const ImageSetting = ({
         ref={fileRef}
         hidden
         max={3}
-        accept=".jpg, .jpeg, .gif, .png, .bmp"
+        accept=".jpg, .jpeg, .png, .bmp"
         type="file"
         onChange={(e) => onChange(e, type)}
       />
